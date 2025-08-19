@@ -152,7 +152,7 @@ body {
 }
 
 .filter-items-btn {
-  @apply w-full justify-start hover:bg-primary/10 flex text-xs font-normal;
+  @apply w-full justify-start hover:bg-primary/10 text-47gray dark:text-white flex text-xs font-normal;
 }
 
 .system-health-text {

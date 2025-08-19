@@ -1,5 +1,5 @@
 import { useMantineColorScheme } from '@mantine/core'
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { useUiStore } from 'src/store/ui.store'
 
 const useDarkMode = () => {
@@ -22,8 +22,10 @@ const useDarkMode = () => {
     setIsDarkMode(newMode)
   }
 
-  useEffect(() => {
-    setDarkClass(isDarkMode)
+  useLayoutEffect(() => {
+    if (isDarkMode !== null) {
+      setDarkClass(isDarkMode as boolean)
+    }
   }, [isDarkMode])
 
   return { isDarkMode, changeMode }

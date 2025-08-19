@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 
 interface UIStoreState {
-  isDarkMode: boolean
+  isDarkMode: boolean | null
   isNavCollapse: boolean
   setIsDarkMode: (value: boolean) => void
   setIsNavCollapse: (type: boolean) => void
@@ -16,7 +16,7 @@ const initialState = {
 
 export const useUiStore = create<UIStoreState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       ...initialState,
       setIsNavCollapse: (type: boolean) => set({ isNavCollapse: type }),
       setIsDarkMode: (val) => set({ isDarkMode: val }),

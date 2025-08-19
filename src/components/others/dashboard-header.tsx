@@ -7,9 +7,15 @@ interface Props {
   title?: string
   description?: string
   rightSection?: React.ReactNode
+  prevRoute?: string
 }
 
-export const DashboardHeader: React.FC<Props> = ({ title, description, rightSection }) => {
+export const DashboardHeader: React.FC<Props> = ({
+  title,
+  prevRoute,
+  description,
+  rightSection,
+}) => {
   const params = useParams()
   const router = useRouter()
 
@@ -34,7 +40,7 @@ export const DashboardHeader: React.FC<Props> = ({ title, description, rightSect
           <Button
             leftSection={<IconLeftLong />}
             variant='subtle'
-            onClick={() => router.back()}
+            onClick={() => (prevRoute ? router.push(prevRoute) : router.back())}
             className={`arrow-btn hover:!scale-100  !px-1 !py-0 flex items-center !gap-[1px] `}
           >
             Back to Users

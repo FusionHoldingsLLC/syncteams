@@ -1,4 +1,3 @@
-import { IconArrowDown } from '@/public/assets/svgs/icon-down'
 import { IconFilter } from '@/public/assets/svgs/icon-filter'
 import { Accordion, ActionIcon, Box, Button, Flex, Popover, Table } from '@mantine/core'
 import { useRouter } from 'nextjs-toploader/app'
@@ -133,15 +132,19 @@ export const UsersTable = () => {
 
 const FilterBtn = () => {
   const actionList = useMemo(() => {
-    return [{ name: '' }]
+    return [
+      { label: 'Active', value: 'active' },
+      { label: 'Deactivate', value: 'deactivate' },
+      { label: 'Dormant', value: 'dormant' },
+    ]
+  }, [])
+  const dateList = useMemo(() => {
+    return [
+      { label: 'Latest', value: 'latest' },
+      { label: 'Earliest', value: 'Earliest' },
+    ]
   }, [])
 
-  const items = data.map((item) => (
-    <Accordion.Item key={item.value} value={item.value}>
-      <Accordion.Control icon={item.emoji}>{item.value}</Accordion.Control>
-      <Accordion.Panel>{item.description}</Accordion.Panel>
-    </Accordion.Item>
-  ))
   return (
     <Popover
       transitionProps={{
@@ -161,42 +164,34 @@ const FilterBtn = () => {
       </Popover.Target>
       <Popover.Dropdown className='!p-0'>
         <Accordion>
-          <Accordion.Item value={'Yes'}>
+          <Accordion.Item p={0} value={'Yes'}>
             <Accordion.Control
               className='filter-items-btn'
               chevron
-              icon={<IconArrowDown className='stroke-red' />}
+              // icon={<IconArrowDown className='stroke-black' />}
             >
-              John
+              Date Register
             </Accordion.Control>
-            <Accordion.Panel>happy</Accordion.Panel>
+            <Accordion.Panel p={0}>
+              {dateList.map((item) => {
+                return (
+                  <Button key={item.value} size='xs' variant='subtle' className='filter-items-btn'>
+                    {item.label}
+                  </Button>
+                )
+              })}
+            </Accordion.Panel>
           </Accordion.Item>
         </Accordion>
-        <Button size='xs' variant='subtle' className=' filter-items-btn'>
-          Active
-        </Button>
+
+        {actionList.map((item) => {
+          return (
+            <Button key={item.value} size='xs' variant='subtle' className='filter-items-btn'>
+              {item.label}
+            </Button>
+          )
+        })}
       </Popover.Dropdown>
     </Popover>
   )
 }
-
-export const data = [
-  {
-    emoji: '🍎',
-    value: 'Apples',
-    description:
-      'Crisp and refreshing fruit. Apples are known for their versatility and nutritional benefits. They come in a variety of flavors and are great for snacking, baking, or adding to salads.',
-  },
-  {
-    emoji: '🍌',
-    value: 'Bananas',
-    description:
-      'Naturally sweet and potassium-rich fruit. Bananas are a popular choice for their energy-boosting properties and can be enjoyed as a quick snack, added to smoothies, or used in baking.',
-  },
-  {
-    emoji: '🥦',
-    value: 'Broccoli',
-    description:
-      'Nutrient-packed green vegetable. Broccoli is packed with vitamins, minerals, and fiber. It has a distinct flavor and can be enjoyed steamed, roasted, or added to stir-fries.',
-  },
-]
