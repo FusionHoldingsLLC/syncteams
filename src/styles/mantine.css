@@ -1,0 +1,74 @@
+.mantine-input > .input {
+  @apply h-[37px];
+}
+
+.mantine-TextInput-label {
+  @apply text-sm font-medium;
+}
+.input {
+  @apply h-[37px];
+}
+.mantine-btn {
+  @apply h-[37px] hover:scale-[1.01]  transition-all  text-sm rounded-md font-semibold;
+}
+
+.mantine-TextInput-input {
+  @apply text-sm h-[34px]  rounded-[6px] placeholder:text-slate-400 dark:bg-transparent dark:text-white;
+}
+.mantine-PasswordInput-input {
+  @apply text-sm h-[34px]  rounded-[6px] placeholder:!text-slate-400 dark:bg-transparent dark:text-white;
+}
+
+.mantine-PinInput-root {
+  @apply gap-4;
+}
+
+.mantine-PinInput-input {
+  @apply w-[50px] h-[50px] dark:bg-transparent dark:text-white rounded-[8px] dark:border-[#3A3A3A];
+}
+.mantine-PinInput-root {
+  @apply h-[70px];
+}
+
+.custom-pagination-control {
+  @apply transition-all duration-300 bg-transparent hover:text-primary font-medium size-10 text-47gray dark:text-white  text-xs border-none hover:bg-primary/10;
+}
+.custom-pagination-control[data-active='true'] {
+  @apply transition-all duration-300 border-[0.5px] border-solid hover:bg-primary border-primary  hover:text-white text-black dark:text-white;
+}
+
+.custom-pagination-btn {
+  @apply transition-all duration-300 text-xs hover:stroke-primary  font-medium hover:bg-primary/10 text-47gray dark:text-white;
+}
+.custom-pagination-btn[data-disabled='true'] {
+  @apply bg-transparent duration-300 opacity-50;
+}
+
+.scrollbar {
+  &,
+  &:hover {
+    @apply bg-primary/10;
+  }
+
+  .thumb {
+    @apply bg-primary;
+  }
+
+  &[data-orientation='horizontal'] .thumb {
+    @apply bg-primary;
+  }
+}
+
+.corner {
+  @apply bg-primary;
+  opacity: 1;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

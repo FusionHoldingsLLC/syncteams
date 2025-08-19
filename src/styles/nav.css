@@ -1,0 +1,117 @@
+.custom-scrollbar {
+  overflow-y: scroll;
+  /* Enable vertical scrolling */
+
+  /* Webkit Browsers */
+  &::-webkit-scrollbar {
+    width: 4px;
+    /* Scrollbar width */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    /* Track color */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #88888846;
+    /* Thumb color */
+    border-radius: 4px;
+    /* Rounded corners */
+    border: 0px solid transparent;
+    /* Optional for spacing */
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Thumb color on hover */
+  }
+
+  /* Firefox */
+  scrollbar-width: thin;
+  /* Makes scrollbar thinner */
+  scrollbar-color: #88888846 transparent;
+  /* Thumb and track colors */
+}
+
+.side-links {
+  flex: 1;
+}
+
+.side-linksInner {
+  @apply flex flex-col;
+}
+
+.side-header {
+  @apply flex p-2 h-[72px]  items-center;
+}
+.side-header[data-collapse='true'] {
+  @apply flex items-center  p-0  justify-center;
+}
+.user-nav-card {
+  @apply flex p-2 h-[68px]  items-center;
+}
+
+.user-nav-card-name {
+  @apply text-xs font-semibold;
+}
+.user-nav-card-name[data-collapse='true'] {
+  @apply md:hidden;
+}
+
+.base-layout-wrapper {
+  @apply w-full  h-screen px-4 md:pl-0 md:pr-8 md:py-4  overflow-y-scroll flex gap-8 flex-col;
+}
+
+.side-navbar {
+  @apply transition-all relative rounded-2xl  hidden md:flex  h-[calc(100vh-64px)] flex-col  w-[255px];
+}
+.side-navbar[data-collapse='true'] {
+  @apply w-[64px];
+}
+
+.secondary-bg {
+  @apply bg-[#F2FAFD] dark:bg-[#0C1519];
+}
+.secondary-bg-two {
+  @apply bg-primary/10 dark:bg-[#0C1519];
+}
+
+.app-border {
+  @apply border-[0.5px] border-solid border-[rgba(196,196,196,0.50)];
+}
+
+.side-nav-links-btn {
+  @apply bg-transparent gap-2 py-3 p-2  text-sm font-bold flex items-center transition-all w-full hover:bg-brandblue2/5 rounded-sm;
+}
+.side-nav-links-btn[data-active='true'] {
+  @apply text-primary;
+}
+.side-nav-links-btn[data-collapse='true'] {
+  @apply md:items-center md:justify-center;
+}
+
+.side-nav-links-text {
+  @apply text-sm font-bold;
+}
+.side-nav-links-text[data-collapse='true'] {
+  @apply md:hidden;
+}
+
+.side-nav-links-icon {
+  @apply stroke-black dark:stroke-white size-5;
+}
+.side-nav-links-icon[data-active='true'] {
+  @apply stroke-primary;
+}
+
+.collapse-btn {
+  @apply absolute transition-all duration-500 size-6 items-center justify-center rounded-lg right-[-15px] bg-primary -bottom-[13px];
+}
+.collapse-btn[data-collapse='true'] {
+  @apply hidden transition-all duration-500;
+}
+
+.fixed-top-nav {
+  @apply md:hidden  w-full fixed left-0 h-[70px] px-4 py-4 z-50  top-0;
+}

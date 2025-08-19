@@ -1,0 +1,19 @@
+.list {
+  @apply gap-2  flex-nowrap w-full overflow-x-scroll;
+  position: relative;
+}
+
+.indicator {
+  @apply bg-[#F2FAFD] rounded-lg dark:bg-[#0C1519];
+}
+
+.tab {
+  @apply px-[3.5rem] font-medium rounded-lg text-xs;
+  z-index: 1;
+  font-weight: 500;
+  transition: color 100ms ease;
+
+  &[data-active] {
+    @apply text-primary;
+  }
+}

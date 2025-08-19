@@ -1,0 +1,170 @@
+/* @import '@mantine/core/styles.css'; */
+
+@import '@mantine/core/styles.css';
+@import 'tailwindcss';
+@import '../styles/mantine.css';
+@import '../styles/nav.css';
+@import '../styles/tab.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  font-family: 'Geist', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: #0098da;
+  --color-black-1: #202022;
+  --color-grayed: #787878;
+  --color-green: #059669;
+  --color-red: #ff0000;
+  --color-brandblue2: #0098da;
+  --color-brandblue3: #91d8f7;
+  --color-47gray: #474747;
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  @apply dark:bg-black bg-white font-sans h-screen overflow-hidden;
+}
+.primary-background {
+  @apply dark:bg-black bg-white;
+}
+
+.auth-footer-text {
+  @apply text-sm font-normal dark:text-white text-[#474747];
+}
+
+.auth-wrapper {
+  @apply gap-4  flex-col flex;
+}
+
+.auth-left {
+  @apply hidden lg:flex py-4  items-center justify-between;
+}
+
+.auth-title {
+  @apply text-[20px] font-bold dark:text-white text-black;
+}
+
+.sm-text {
+  @apply text-sm;
+}
+
+.auth-back-btn {
+  @apply rounded-md dark:rounded-full dark:bg-primary w-[20px] h-[20px] border-[#D1D1D180] border-solid bg-[#F5F5F5];
+}
+
+.survey-card-item {
+  @apply border-[0.5px] transition-all duration-300 rounded-[16px]  border-[#D1D1D1] p-[16px];
+}
+.survey-card-item[data-active='true'] {
+  @apply border-[0.5px] rounded-[16px]  !border-primary p-[16px] bg-primary/5;
+}
+.survey-card-text {
+  @apply text-[16px] font-semibold text-center;
+}
+
+.page-title {
+  @apply text-black-1 dark:text-white text-xl font-bold leading-[normal];
+}
+.page-des {
+  @apply text-grayed dark:text-white/60 text-xs font-medium leading-[normal];
+}
+
+.dashboard-top-card {
+  @apply flex flex-col border-t-[5px] px-[15px] pb-[15px] pt-[15px]  border-t-brandblue3   items-center  overflow-hidden rounded-xl;
+}
+.dashboard-top-card-title {
+  @apply text-sm font-semibold text-black dark:text-white;
+}
+.dashboard-top-card-value {
+  @apply text-3xl font-bold text-black dark:text-white;
+}
+
+.default-text {
+  @apply text-[#202022] dark:text-white;
+}
+
+.arrow-btn {
+  @apply text-primary h-[30px]  text-xs px-0 font-medium transition-all  hover:scale-105;
+}
+
+.table-header-text {
+  @apply text-center text-xs font-bold text-47gray dark:text-white;
+}
+.table-title-text {
+  @apply line-clamp-1 text-xs font-bold text-47gray dark:text-white;
+}
+.table-item-text {
+  @apply line-clamp-1 text-center text-xs text-47gray dark:text-white;
+}
+
+.custom-table {
+  --table-striped-color: #f7f7f7; /* dark gray */
+}
+
+.custom-table-head {
+  @apply bg-[#f7f7f7] dark:bg-[#1F1F1F] border-[#D1D1D1] border-y-[0.5px];
+}
+
+/* Dark mode stripes */
+[data-mantine-color-scheme='dark'] .custom-table {
+  --table-striped-color: #1f1f1f; /* dark gray */
+}
+.focus {
+  &:focus {
+    outline-offset: 3px;
+  }
+}
+
+/* Use `&:focus-visible` when you want focus ring to be visible
+   only when user navigates with keyboard, for example by pressing Tab key */
+.focus-auto {
+  &:focus-visible {
+    outline: 2px solid;
+    outline-offset: 2px;
+  }
+}
+
+.dashboard-card-header-text {
+  @apply text-sm font-bold text-black dark:text-white;
+}
+
+.page-layout-wrapper {
+  @apply w-full flex flex-col gap-4 py-4;
+}
+
+.filter-items-btn {
+  @apply w-full justify-start hover:bg-primary/10 flex text-xs font-normal;
+}
+
+.system-health-text {
+  @apply text-47gray dark:text-white text-xs font-bold flex-1;
+}
+
+.default-gray47-text {
+  @apply text-47gray dark:text-white;
+}
+
+.custom-chart-tooltip .apexcharts-tooltip {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
