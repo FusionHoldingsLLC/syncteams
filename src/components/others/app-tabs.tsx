@@ -1,50 +1,95 @@
-import { FloatingIndicator, Tabs } from '@mantine/core'
-import { useState } from 'react'
+import { FloatingIndicator, ScrollArea, Tabs, Transition } from '@mantine/core'
+import { useMemo, useState } from 'react'
+import { useQueryParams } from 'src/hooks/logic/use-query-params'
 import { SectionItem } from 'src/types/general'
 
 interface Props {
   tabList: SectionItem[]
+  customClassName?: string
+  value?: string
+  onChange?: (val: string) => void
+  disableParams?: boolean
 }
 
-export const AppTabs: React.FC<Props> = ({ tabList }) => {
+export const AppTabs: React.FC<Props> = ({
+  tabList,
+  value,
+  customClassName,
+  disableParams,
+  onChange,
+}) => {
   const [rootRef, setRootRef] = useState<HTMLDivElement | null>(null)
-  const [value, setValue] = useState<string | null>(tabList[0].value)
+  const [tabValue, setTabValue] = useState<string | null>(tabList[0].value)
   const [controlsRefs, setControlsRefs] = useState<Record<string, HTMLButtonElement | null>>({})
   const setControlRef = (val: string) => (node: HTMLButtonElement) => {
     controlsRefs[val] = node
     setControlsRefs(controlsRefs)
   }
 
+  const { setParam } = useQueryParams()
+
+  const handleChange = (val: string) => {
+    onChange?.(val as string)
+    setTabValue(val)
+    if (!disableParams) {
+      setParam('t', val)
+    }
+  }
+
+  const testValue = useMemo(() => {
+    return value || tabValue
+  }, [value])
+
   return (
     <>
-      <Tabs
-        orientation='horizontal'
-        variant='none'
-        defaultValue={tabList[0].value}
-        value={value}
-        onChange={setValue}
-      >
-        <Tabs.List ref={setRootRef} className={'list'}>
-          {tabList.map((item) => {
-            return (
-              <Tabs.Tab
-                key={item.value}
-                value={item.value}
-                ref={setControlRef(item.value)}
-                className={'tab'}
-              >
-                {item.label}
-              </Tabs.Tab>
-            )
-          })}
+      <ScrollArea scrollbarSize={1} className={`${customClassName} overflow-scroll`}>
+        <Tabs
+          orientation='horizontal'
+          variant='none'
+          defaultValue={tabList[0].value}
+          value={testValue}
+          onChange={(val) => {
+            handleChange(val as string)
+          }}
+        >
+          <Tabs.List ref={setRootRef} className={'list'}>
+            {tabList.map((item) => {
+              return (
+                <Tabs.Tab
+                  key={item.value}
+                  value={item.value}
+                  ref={setControlRef(item.value)}
+                  className={'tab'}
+                >
+                  {item.label}
+                </Tabs.Tab>
+              )
+            })}
 
-          <FloatingIndicator
-            target={value ? controlsRefs[value] : null}
-            parent={rootRef}
-            className={'indicator'}
-          />
-        </Tabs.List>
-      </Tabs>
+            <FloatingIndicator
+              target={testValue ? controlsRefs[testValue] : null}
+              parent={rootRef}
+              className={'indicator'}
+            />
+          </Tabs.List>
+        </Tabs>
+      </ScrollArea>
+
+      {tabList.map((item) => {
+        return (
+          <Transition
+            mounted={Boolean(testValue === item.value)}
+            transition='fade-up'
+            duration={300}
+            exitDuration={200}
+            enterDelay={300}
+            exitDelay={300}
+            timingFunction='ease'
+          >
+            {(styles) => <div style={styles}>{item.component}</div>}
+          </Transition>
+        )
+      })}
     </>
   )
 }

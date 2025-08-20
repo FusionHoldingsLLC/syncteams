@@ -24,7 +24,7 @@ export const DashboardHeader: React.FC<Props> = ({
 
   return (
     <>
-      <Flex className=' md:sticky z-20 flex-wrap gap-4 mb-6 justify-between pt-16 md:pt-8 pb-2 -top-[1.7rem] primary-background h-fit  '>
+      <Flex className=' md:sticky z-20 flex-wrap gap-4  justify-between pt-16 md:pt-8 pb-2 -top-[1.7rem] primary-background h-fit  '>
         <Flex className='flex-col'>
           <Text className='page-title !mb-1'>{title}</Text>
           <Text className='page-des'>{description}</Text>

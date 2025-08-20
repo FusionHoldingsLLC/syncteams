@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { JSX, ReactNode } from 'react'
 
 export interface UserDetails {
   email?: string
@@ -33,6 +33,7 @@ export interface ErrorRes {
 export interface SectionItem {
   value: string
   label: string
+  component?: JSX.Element
 }
 
 export interface CampaignConfig {

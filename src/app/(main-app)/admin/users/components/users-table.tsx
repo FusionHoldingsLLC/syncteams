@@ -22,7 +22,7 @@ export const UsersTable = () => {
           Math.floor(Math.random() * 12), // random month
           Math.floor(Math.random() * 28) + 1, // random day
         ).toLocaleDateString('en-GB'),
-        status: Math.random() > 0.5 ? 'Active' : 'Inactive',
+        status: Math.random() > 0.5 ? 'Active' : 'Deactivated',
         subscription: ['Free', 'Pro', 'Enterprise'][Math.floor(Math.random() * 3)],
       })),
     [],
@@ -41,6 +41,8 @@ export const UsersTable = () => {
       { label: 'Enterprise', value: 'enterprise' },
     ]
   }, [])
+
+  const getStatusColor = useMemo(() => {}, [])
 
   return (
     <Box className='flex flex-col gap-[30px] rounded-lg'>
@@ -75,13 +77,13 @@ export const UsersTable = () => {
           }}
           stickyHeader
           stickyHeaderOffset={-1}
-          verticalSpacing={12}
+          // verticalSpacing={12}
           horizontalSpacing={10}
         >
           <Table.Thead>
             <Table.Tr>
               {headerList.map((val) => (
-                <Table.Th key={val}>
+                <Table.Th className='h-[50px]' key={val}>
                   <TableHeaderText className='!text-start' title={val} />
                 </Table.Th>
               ))}
@@ -98,7 +100,7 @@ export const UsersTable = () => {
                   onClick={() => {
                     router.push(routes.app.admin.userDetails(`${index}`))
                   }}
-                  className='cursor-pointer hover:bg-gray-100 transition'
+                  className='cursor-pointer h-[50px] hover:bg-gray-100 transition'
                 >
                   <Table.Td>
                     <TableItemText className='!text-start ' title={val} />
@@ -113,7 +115,12 @@ export const UsersTable = () => {
                     <TableItemText className='!text-start' title={user.regDate} />
                   </Table.Td>
                   <Table.Td>
-                    <TableItemText className='!text-start' title={user.status} />
+                    <TableItemText
+                      className={`${
+                        user.status === 'Active' ? '!text-[#018F0B] ' : '!text-[#C10000] '
+                      } !text-start !font-bold`}
+                      title={user.status}
+                    />
                   </Table.Td>
                   <Table.Td>
                     <TableItemText className='!text-start' title={user.subscription} />

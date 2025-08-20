@@ -133,10 +133,10 @@ export const DashboardTable = () => {
           classNames={{
             th: 'custom-table-head',
             table: '!bg-transparent',
+            tr: '!h-[37px]',
           }}
           stickyHeader
           stickyHeaderOffset={0}
-          verticalSpacing={15}
           horizontalSpacing={10}
           data={tableData}
         />

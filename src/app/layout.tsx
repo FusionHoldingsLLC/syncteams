@@ -24,7 +24,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  // const mode = localStorage.getItem('mode') as string
   return (
     <html lang='en'>
       <head>

@@ -1,5 +1,5 @@
 .list {
-  @apply gap-2  flex-nowrap w-full overflow-x-scroll;
+  @apply gap-2 flex-nowrap  flex-row flex;
   position: relative;
 }
 
@@ -15,5 +15,20 @@
 
   &[data-active] {
     @apply text-primary;
+  }
+}
+
+.fill-tab .list {
+  @apply p-1 bg-primary/10 rounded-lg w-fit border-[0.5px] border-solid  border-app-border;
+}
+
+.fill-tab .indicator {
+  @apply bg-primary text-white;
+}
+.fill-tab .tab {
+  @apply text-47gray dark:text-white/70 font-semibold h-[28px];
+
+  &[data-active] {
+    @apply text-white;
   }
 }

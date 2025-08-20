@@ -3,6 +3,7 @@
 import { Box } from '@mantine/core'
 import { DashboardHeader } from 'src/components/others/dashboard-header'
 import { routes } from 'src/lib/routes'
+import { DetailsHeader } from './details-header'
 
 const UsersDetailsContent = () => {
   return (
@@ -12,6 +13,8 @@ const UsersDetailsContent = () => {
         title='Users'
         description='View and manage all users'
       />
+
+      <DetailsHeader />
     </Box>
   )
 }

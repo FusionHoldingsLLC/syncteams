@@ -1,13 +1,13 @@
-import { Metadata } from "next";
-import DashboardClient from "./components/dashboard-client";
+import { Metadata } from 'next'
+import SettingsClient from './components/settings-client'
 
 export const metadata: Metadata = {
-  title: "Dashboard",
-};
+  title: 'Settings',
+}
 
-const DashboardPage = () => {
+const SettingsPage = () => {
   // const session = await getServerSession(authOptions);
-  return <DashboardClient />;
-};
+  return <SettingsClient />
+}
 
-export default DashboardPage;
+export default SettingsPage

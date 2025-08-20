@@ -9,7 +9,7 @@ export const AppPagination = () => {
   const total = 10
 
   return (
-    <Paper className=' sticky bottom-0 z-30 p-5 '>
+    <Paper className=' mt-[32px] sticky bottom-0 z-30 p-2 '>
       <Center className='justify-center gap-2 items-center   !w-full '>
         <Button
           disabled={Boolean(value === 1)}

@@ -5,6 +5,9 @@
 .mantine-TextInput-label {
   @apply text-sm font-medium;
 }
+.mantine-Select-label {
+  @apply text-sm font-medium;
+}
 .input {
   @apply h-[37px];
 }
@@ -13,6 +16,10 @@
 }
 
 .mantine-TextInput-input {
+  @apply text-sm h-[34px]  rounded-[6px] placeholder:text-slate-400 dark:bg-transparent dark:text-white;
+}
+
+.mantine-Select-input {
   @apply text-sm h-[34px]  rounded-[6px] placeholder:text-slate-400 dark:bg-transparent dark:text-white;
 }
 .mantine-PasswordInput-input {

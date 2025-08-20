@@ -8,6 +8,22 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@font-face {
+  font-family: 'bonn-bf';
+  src: url('/public/fonts/bonn-bf-regular.otf') format('woff2'),
+    url('/public/fonts/bonn-bf-regular.otf') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'bonn-bf';
+  src: url('/public/fonts/bonn-bf-bold.otf') format('woff2'),
+    url('/public/fonts/bonn-bf-bold.otf') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -28,9 +44,13 @@
   --color-brandblue2: #0098da;
   --color-brandblue3: #91d8f7;
   --color-47gray: #474747;
+  --color-newstroke: #d1d1d1;
+  --color-gray-complimentary: #474747;
+  --color-app-border: rgba(196, 196, 196, 0.5);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-bonn: 'bonn-bf', 'san';
 }
 
 @media (prefers-color-scheme: dark) {
@@ -167,4 +187,65 @@ body {
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
+}
+
+.user-detail-header-btn {
+  @apply rounded-lg text-xs font-bold;
+}
+.user-detail-header-avatar {
+  @apply size-32  bg-amber-300/20 text-4xl font-bold;
+}
+.user-detail-header-avatar .mantine-Avatar-placeholder {
+  @apply text-4xl text-amber-300 font-bold;
+}
+
+.app-border {
+  @apply border-[0.5px] border-solid border-app-border;
+}
+
+.s-profile-name {
+  @apply text-white dark:text-black text-base font-medium font-['Bonn_BF'];
+}
+.s-profile-email {
+  @apply justify-start text-newstroke text-sm font-normal font-['Geist'];
+}
+
+.s-profile-avatar {
+  @apply w-10 h-10 bg-white/20 rounded-full border border-newstroke backdrop-blur-[5px];
+}
+
+.s-profile-avatar .mantine-Avatar-placeholder {
+  @apply text-white text-lg text-center font-bold font-['Geist'];
+}
+
+.s-profile-teams-btn {
+  @apply px-2 py-1 transition-all h-[26px] bg-white/20 hover:scale-[1.04] rounded-[32px]  border-[0.50px] border-[-0.50px] border-newstroke backdrop-blur-[5px] flex justify-center items-center gap-1;
+}
+.s-profile-teams-btn-text {
+  @apply justify-start text-white dark:text-black text-sm font-semibold font-['Geist'];
+}
+
+.s-settings-title {
+  @apply text-black dark:text-white text-base font-medium font-['Bonn_BF'];
+}
+.s-settings-des {
+  @apply justify-start text-47gray dark:text-white/60 text-sm font-normal font-['Geist'];
+}
+.s-settings-outline-btn {
+  @apply rounded-md text-47gray border-47gray dark:border-white/90 dark:text-white/90 border-[0.50px] text-sm font-semibold font-['Geist'];
+}
+
+.s-settings-input {
+  @apply w-full;
+}
+.s-settings-input-des {
+  @apply justify-start text-gray-complimentary text-sm font-normal font-['Geist'];
+}
+
+.s-settings-delete-btn {
+  @apply rounded-md h-[34px] hover:text-red-500 border-red-600 bg-red-600/5 text-red-500 border-[0.50px] text-sm font-semibold justify-center items-center gap-2.5 font-['Geist'] px-4 py-2;
+}
+
+.p-theme-text {
+  @apply justify-start text-black dark:text-white text-sm font-medium font-['Geist'];
 }
