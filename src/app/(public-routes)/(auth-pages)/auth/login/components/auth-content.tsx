@@ -1,41 +1,38 @@
 import { Anchor, Button, Divider, Flex, PasswordInput, Text, TextInput } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
-import { Dispatch, SetStateAction } from 'react'
 
+import { useLoginMutation } from '@/graphql/generated'
 import { IconGoogle } from '@/public/assets/svgs/icon-google'
-import { UseMutateFunction } from '@tanstack/react-query'
-import { AxiosResponse } from 'axios'
-import { useRouter } from 'nextjs-toploader/app'
-import ErrorCard from 'src/components/cards/error-card'
 import { useNavigation } from 'src/hooks/logic/use-navigation'
 import { routes } from 'src/lib/routes'
 import { FormLoginValue } from 'src/types/auth'
 
 type Props = {
-  isLoading: boolean
-  error: string
-  setError: Dispatch<SetStateAction<string>>
   form: UseFormReturnType<FormLoginValue>
-  onLogin: UseMutateFunction<AxiosResponse, any, FormLoginValue, unknown>
 }
 
-const AuthContent = ({ isLoading, error, form, onLogin }: Props) => {
+const AuthContent = ({ form }: Props) => {
   const { navigate } = useNavigation()
-  const router = useRouter()
+
+  const [login, { data, loading, error }] = useLoginMutation()
 
   const handleSubmit = async (value: FormLoginValue) => {
-    const data = {
-      ...value,
+    try {
+      const response = await login({
+        variables: {
+          input: {
+            email: 'Johnamehgregameh@gmail.com',
+            password: 'Francium9@',
+          },
+        },
+      })
+
+      console.log(response)
+      // console.log('Login successful:', response.data?.login)
+      // localStorage.setItem('token', response.data?.login.token || '')
+    } catch (err) {
+      console.error('Login failed:', err)
     }
-    router.push(routes.app.admin.dashboard)
-    onLogin(data, {
-      onSuccess(data) {
-        console.log(data)
-      },
-      onError: (error) => {
-        console.log(error)
-      },
-    })
   }
 
   return (
@@ -44,7 +41,7 @@ const AuthContent = ({ isLoading, error, form, onLogin }: Props) => {
       onSubmit={form.onSubmit(handleSubmit)}
       style={{ position: 'relative' }}
     >
-      <ErrorCard error={error} />
+      {/* <ErrorCard error={error} /> */}
 
       <Text className='auth-title text-center'>Welcome</Text>
       <TextInput
@@ -63,8 +60,8 @@ const AuthContent = ({ isLoading, error, form, onLogin }: Props) => {
       <Flex className='justify-end'>
         <Anchor className='sm-text'>Forgot password?</Anchor>
       </Flex>
-      <Button variant='primary' loading={isLoading} type='submit' className='w-full'>
-        Continues
+      <Button loading={loading} variant='primary' type='submit' className='w-full'>
+        Continue
       </Button>
 
       <Text className='sm-text text-center font-normal  !text-slate-500'>

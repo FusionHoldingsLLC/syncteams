@@ -30,7 +30,7 @@ export const ProfileSection = () => {
     ]
   }, [])
   return (
-    <>
+    <Flex className='gap-8 flex-col'>
       <Box className='p-8 relative bg-[#059669] dark:bg-[#06AF79] rounded-xl  outline-1 outline-offset-[-1px] outline-primary w-full inline-flex justify-start items-start gap-6'>
         <Flex className='flex-1 flex justify-between flex-wrap gap-4 items-center'>
           <Flex className='items-center gap-4 sm:gap-[24px] flex-wrap'>
@@ -49,7 +49,7 @@ export const ProfileSection = () => {
         </Flex>
       </Box>
 
-      <Flex className='self-stretch p-8 rounded-xl   app-border flex flex-col justify-start items-start gap-8'>
+      <Flex className='app-card-border'>
         <Flex className='self-stretch flex-wrap gap-3 inline-flex justify-between items-center'>
           <Flex className=' flex-col justify-start items-start gap-1'>
             <Text className='s-settings-title'>Basic Information</Text>
@@ -67,7 +67,7 @@ export const ProfileSection = () => {
             </Button>
           </Flex>
         </Flex>
-        <Box className='w-full grid gap-4  sm:grid-cols-2'>
+        <Box className='w-full grid gap-4  md:grid-cols-2'>
           {inputList.map((item) => {
             return (
               <Flex className='flex-col gap-2'>
@@ -88,6 +88,6 @@ export const ProfileSection = () => {
           Delete Account
         </Button>
       </Flex>
-    </>
+    </Flex>
   )
 }

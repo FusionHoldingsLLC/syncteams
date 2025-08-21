@@ -20,8 +20,10 @@
     ],
     "paths": {
       "src/*": ["./src/*"],
+      "@/env": ["./env.js"],
       "@/components/*": ["./src/components/*"],
       "@/lib/*": ["./src/lib/*"],
+      "@/graphql/*": ["./src/graphql/*"],
       "@/public/*": ["./public/*"]
     }
   },

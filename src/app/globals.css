@@ -175,6 +175,10 @@ body {
   @apply w-full justify-start hover:bg-primary/10 text-47gray dark:text-white flex text-xs font-normal;
 }
 
+.menu-btn {
+  @apply text-xs;
+}
+
 .system-health-text {
   @apply text-47gray dark:text-white text-xs font-bold flex-1;
 }
@@ -234,6 +238,9 @@ body {
 .s-settings-outline-btn {
   @apply rounded-md text-47gray border-47gray dark:border-white/90 dark:text-white/90 border-[0.50px] text-sm font-semibold font-['Geist'];
 }
+.app-card-border {
+  @apply self-stretch p-8   rounded-xl   border-[0.5px] border-solid border-app-border flex  flex-col justify-start items-start gap-8;
+}
 
 .s-settings-input {
   @apply w-full;
@@ -248,4 +255,43 @@ body {
 
 .p-theme-text {
   @apply justify-start text-black dark:text-white text-sm font-medium font-['Geist'];
+}
+
+.theme-item-card {
+  @apply flex-1 h-44 px-6 py-4  rounded-lg  transition-all  inline-flex flex-col justify-start items-center gap-2;
+}
+.theme-item-card[data-active='true'] {
+  @apply outline-sky-500 outline outline-[1.50px] transition-all outline-offset-[-1.50px] shadow-[0px_0px_5px_0px_rgba(0,152,218,1.00)];
+}
+
+.theme-card-label {
+  @apply self-stretch justify-start text-black dark:text-white text-sm font-medium font-['Geist'];
+}
+.theme-card-title {
+  @apply justify-start text-black dark:text-white text-sm font-normal font-['Geist'];
+}
+.theme-card-des {
+  @apply self-stretch justify-start text-47gray dark:text-white/70 text-xs font-normal font-['Geist'];
+}
+
+.app-btn {
+  @apply justify-start h-[34px] text-white text-sm font-semibold font-['Geist'];
+}
+
+.plus-btn {
+  @apply bg-primary/10 flex rounded-full items-center justify-center size-[34px] border-primary border-[0.5];
+}
+
+.member-avatar {
+  @apply size-9 bg-primary items-center justify-center rounded-full border  border-newstroke backdrop-blur-[5px];
+}
+.member-avatar .mantine-Avatar-placeholder {
+  @apply text-white text-xl font-bold font-['Geist'];
+}
+
+.member-name {
+  @apply justify-start text-black dark:text-white text-sm font-medium font-['Geist'];
+}
+.member-email {
+  @apply justify-start text-black/50 dark:text-white/50 text-xs font-normal font-['Geist'];
 }

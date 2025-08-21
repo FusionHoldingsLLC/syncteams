@@ -1,8 +1,12 @@
 import { IconArrowDown } from '@/public/assets/svgs/icon-down'
-import { Box, Flex, Select, Text } from '@mantine/core'
+import { Box, Flex, Image, Select, Text, UnstyledButton } from '@mantine/core'
 import { useMemo } from 'react'
+import useDarkMode from 'src/hooks/logic/use-dark-mode'
+import { useUiStore } from 'src/store/ui.store'
 
 export const PreferenceSection = () => {
+  const { isDarkMode } = useUiStore()
+  const { setDarkClass } = useDarkMode()
   const sectionList = useMemo(() => {
     return [
       {
@@ -57,8 +61,23 @@ export const PreferenceSection = () => {
       },
     ]
   }, [])
+
+  const getMode = useMemo(() => {
+    if (isDarkMode === null) return 'auto'
+    if (isDarkMode) return 'dark'
+    return 'light'
+  }, [isDarkMode])
+
+  const handleTheme = (val: string) => {
+    if (val === 'light') {
+      setDarkClass(false)
+    }
+    if (val === 'dark') {
+      setDarkClass(true)
+    }
+  }
   return (
-    <Box className='self-stretch p-8   rounded-xl   app-border flex  flex-col justify-start items-start gap-8'>
+    <Box className='app-card-border'>
       <Flex className=' flex-col justify-start items-start gap-1'>
         <Text className='s-settings-title'>Preference</Text>
         <Text className='s-settings-des'>Customize your workspace appearance and experience</Text>
@@ -69,19 +88,29 @@ export const PreferenceSection = () => {
           <Box className='grid grid-cols-1   lg:grid-cols-2 xl:grid-cols-3 w-full gap-4'>
             {themeList.map((item) => {
               return (
-                <Box className='flex-1 h-44 px-6 py-4 bg-white rounded-lg shadow-[0px_0px_5px_0px_rgba(0,152,218,1.00)] outline outline-[1.50px] outline-offset-[-1.50px] outline-sky-500 inline-flex flex-col justify-start items-center gap-2'>
-                  <Box className="self-stretch justify-start text-Black text-sm font-medium font-['Geist']">
-                    {item.label}
+                <UnstyledButton
+                  key={item.value}
+                  data-active={item.value === getMode}
+                  onClick={() => {
+                    handleTheme(item.value)
+                  }}
+                  className=' app-border theme-item-card'
+                >
+                  <Text className='theme-card-label'>{item.label}</Text>
+                  <Box className='self-stretch overflow-hidden app-border flex-1  rounded-lg   flex flex-col justify-center items-center gap-2.5'>
+                    {item.value === 'auto' ? (
+                      <Image
+                        className=' bg-center '
+                        src={'/assets/images/theme-auto.svg'}
+                        alt='Onboarding graphic'
+                      />
+                    ) : (
+                      <Text className='theme-card-title'>{item.title}</Text>
+                    )}
                   </Box>
-                  <Box className='self-stretch flex-1 bg-white rounded-lg outline outline-1 outline-offset-[-1px] outline-neutral-300/50 flex flex-col justify-center items-center gap-2.5'>
-                    <Box className="justify-start text-black text-sm font-normal font-['Geist']">
-                      {item.title}
-                    </Box>
-                  </Box>
-                  <Box className="self-stretch justify-start text-greyed text-xs font-normal font-['Geist']">
-                    {item.description}
-                  </Box>
-                </Box>
+
+                  <Box className='theme-card-des'>{item.description}</Box>
+                </UnstyledButton>
               )
             })}
           </Box>

@@ -37,7 +37,7 @@ export const AppTabs: React.FC<Props> = ({
   }
 
   const testValue = useMemo(() => {
-    return value || tabValue
+    return tabValue
   }, [value])
 
   return (
@@ -78,8 +78,9 @@ export const AppTabs: React.FC<Props> = ({
       {tabList.map((item) => {
         return (
           <Transition
+            key={item.value}
             mounted={Boolean(testValue === item.value)}
-            transition='fade-up'
+            transition='fade-right'
             duration={300}
             exitDuration={200}
             enterDelay={300}

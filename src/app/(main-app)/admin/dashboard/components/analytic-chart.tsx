@@ -168,7 +168,7 @@ const ExecutionChart: React.FC = () => {
       <Flex className='justify-center flex-wrap mb-6 gap-2 items-center'>
         {list.map((item) => {
           return (
-            <Flex className='items-center flex-wrap gap-1'>
+            <Flex key={item.label} className='items-center flex-wrap gap-1'>
               {item.circle}
               <div className="text-center justify-start text-47gray text-[8px] font-normal font-['Geist']">
                 {item.label}

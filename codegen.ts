@@ -1,0 +1,20 @@
+import type { CodegenConfig } from '@graphql-codegen/cli'
+
+const config: CodegenConfig = {
+  overwrite: true,
+  schema: 'https://develop.backend.syncteams.studio/graphql',
+  documents: 'src/**/*.graphql',
+  generates: {
+    'src/graphql/generated.ts': {
+      plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
+      config: {
+        withHooks: true,
+      },
+    },
+    './graphql.schema.json': {
+      plugins: ['introspection'],
+    },
+  },
+}
+
+export default config
