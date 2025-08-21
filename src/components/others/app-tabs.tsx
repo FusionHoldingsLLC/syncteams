@@ -38,7 +38,7 @@ export const AppTabs: React.FC<Props> = ({
 
   const testValue = useMemo(() => {
     return tabValue
-  }, [value])
+  }, [value, tabValue])
 
   return (
     <>
@@ -75,22 +75,23 @@ export const AppTabs: React.FC<Props> = ({
         </Tabs>
       </ScrollArea>
 
-      {tabList.map((item) => {
-        return (
-          <Transition
-            key={item.value}
-            mounted={Boolean(testValue === item.value)}
-            transition='fade-right'
-            duration={300}
-            exitDuration={200}
-            enterDelay={300}
-            exitDelay={300}
-            timingFunction='ease'
-          >
-            {(styles) => <div style={styles}>{item.component}</div>}
-          </Transition>
-        )
-      })}
+      {tabList.length > 0 &&
+        tabList?.map((item) => {
+          return (
+            <Transition
+              key={item.label}
+              mounted={Boolean(testValue === item?.value)}
+              transition='fade-right'
+              duration={300}
+              exitDuration={200}
+              enterDelay={300}
+              exitDelay={300}
+              timingFunction='ease'
+            >
+              {(styles) => <div style={styles}>{item?.component}</div>}
+            </Transition>
+          )
+        })}
     </>
   )
 }

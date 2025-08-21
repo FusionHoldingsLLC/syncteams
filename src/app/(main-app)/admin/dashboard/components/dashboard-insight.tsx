@@ -66,7 +66,7 @@ const InsightCard = ({ section }: { section: CampaignConfig }) => {
         </Box>
 
         <Box className='px-3 py-1 bg-red-400/10 rounded-[20px] inline-flex justify-center items-center gap-2.5'>
-          <div className="text-center justify-start text-red-400 text-[10px] font-bold font-['Geist'] leading-none">
+          <div className='text-center justify-start text-red-400 text-[10px] font-bold font-geist leading-none'>
             High priority
           </div>
         </Box>
@@ -76,10 +76,10 @@ const InsightCard = ({ section }: { section: CampaignConfig }) => {
         {section.sectionList.map((item, index) => {
           return (
             <Box key={index} className=' flex flex-col justify-start items-start gap-1'>
-              <div className=" justify-start text-Black text-xs font-bold font-['Geist'] leading-none">
+              <div className=' justify-start text-Black text-xs font-bold font-geist leading-none'>
                 {item.label}
               </div>
-              <div className=" justify-start text-greyed text-xs font-medium font-['Geist']">
+              <div className=' justify-start text-greyed text-xs font-medium font-geist'>
                 {item.value}
               </div>
             </Box>

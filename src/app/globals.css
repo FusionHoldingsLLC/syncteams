@@ -9,17 +9,232 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @font-face {
-  font-family: 'bonn-bf';
-  src: url('/public/fonts/bonn-bf-regular.otf') format('woff2'),
-    url('/public/fonts/bonn-bf-regular.otf') format('woff');
+  font-family: 'Bonn BF';
+  src: url('/fonts/Boon/Bonn BF Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bonn BF';
+  src: url('/fonts/Boon/Bonn BF ExtraLight.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bonn BF';
+  src: url('/fonts/Boon/Bonn BF Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bonn BF';
+  src: url('/fonts/Boon/Bonn BF Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'bonn-bf';
-  src: url('/public/fonts/bonn-bf-bold.otf') format('woff2'),
-    url('/public/fonts/bonn-bf-bold.otf') format('woff');
+  font-family: 'Bonn BF';
+  src: url('/fonts/Boon/Bonn BF Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bonn BF';
+  src: url('/fonts/Boon/Bonn BF Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bonn BF';
+  src: url('/fonts/Boon/Bonn BF Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bonn BF';
+  src: url('/fonts/Boon/Bonn BF Ultra.otf') format('opentype');
+  font-weight: 950;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-Thin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-ThinItalic.woff2') format('woff2');
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-ExtraLight.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-ExtraLightItalic.woff2') format('woff2');
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-LightItalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-RegularItalic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-MediumItalic.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-SemiBoldItalic.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-BoldItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-ExtraBoldItalic.woff2') format('woff2');
+  font-weight: 800;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-BlackItalic.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticalNeue/HelveticaNeue-Ultralight.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticalNeue/HelveticaNeue-Thin.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticalNeue/HelveticaNeue-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticalNeue/HelveticaNeue-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticalNeue/HelveticaNeue-RegularItalic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticalNeue/HelveticaNeue-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticalNeue/HelveticaNeue-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
 }
@@ -50,7 +265,9 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-bonn: 'bonn-bf', 'san';
+  --font-bonn: 'Bonn B', 'san';
+  --font-geist: 'Geist', 'san';
+  --font-helvetica: 'Helvetica Neue', 'san';
 }
 
 @media (prefers-color-scheme: dark) {
@@ -211,7 +428,7 @@ body {
   @apply text-white dark:text-black text-base font-medium font-['Bonn_BF'];
 }
 .s-profile-email {
-  @apply justify-start text-newstroke text-sm font-normal font-['Geist'];
+  @apply justify-start text-newstroke text-sm font-normal font-geist;
 }
 
 .s-profile-avatar {
@@ -219,24 +436,24 @@ body {
 }
 
 .s-profile-avatar .mantine-Avatar-placeholder {
-  @apply text-white text-lg text-center font-bold font-['Geist'];
+  @apply text-white text-lg text-center font-bold font-geist;
 }
 
 .s-profile-teams-btn {
   @apply px-2 py-1 transition-all h-[26px] bg-white/20 hover:scale-[1.04] rounded-[32px]  border-[0.50px] border-[-0.50px] border-newstroke backdrop-blur-[5px] flex justify-center items-center gap-1;
 }
 .s-profile-teams-btn-text {
-  @apply justify-start text-white dark:text-black text-sm font-semibold font-['Geist'];
+  @apply justify-start text-white dark:text-black text-sm font-semibold font-geist;
 }
 
 .s-settings-title {
   @apply text-black dark:text-white text-base font-medium font-['Bonn_BF'];
 }
 .s-settings-des {
-  @apply justify-start text-47gray dark:text-white/60 text-sm font-normal font-['Geist'];
+  @apply justify-start text-47gray dark:text-white/60 text-sm font-normal font-geist;
 }
 .s-settings-outline-btn {
-  @apply rounded-md text-47gray border-47gray dark:border-white/90 dark:text-white/90 border-[0.50px] text-sm font-semibold font-['Geist'];
+  @apply rounded-md text-47gray border-47gray dark:border-white/90 dark:text-white/90 border-[0.50px] text-sm font-semibold font-geist;
 }
 .app-card-border {
   @apply self-stretch p-8   rounded-xl   border-[0.5px] border-solid border-app-border flex  flex-col justify-start items-start gap-8;
@@ -246,15 +463,15 @@ body {
   @apply w-full;
 }
 .s-settings-input-des {
-  @apply justify-start text-gray-complimentary text-sm font-normal font-['Geist'];
+  @apply justify-start text-gray-complimentary text-sm font-normal font-geist;
 }
 
 .s-settings-delete-btn {
-  @apply rounded-md h-[34px] hover:text-red-500 border-red-600 bg-red-600/5 text-red-500 border-[0.50px] text-sm font-semibold justify-center items-center gap-2.5 font-['Geist'] px-4 py-2;
+  @apply rounded-md h-[34px] hover:text-red-500 border-red-600 bg-red-600/5 text-red-500 border-[0.50px] text-sm font-semibold justify-center items-center gap-2.5 font-geist px-4 py-2;
 }
 
 .p-theme-text {
-  @apply justify-start text-black dark:text-white text-sm font-medium font-['Geist'];
+  @apply justify-start text-black dark:text-white text-sm font-medium font-geist;
 }
 
 .theme-item-card {
@@ -265,17 +482,17 @@ body {
 }
 
 .theme-card-label {
-  @apply self-stretch justify-start text-black dark:text-white text-sm font-medium font-['Geist'];
+  @apply self-stretch justify-start text-black dark:text-white text-sm font-medium font-geist;
 }
 .theme-card-title {
-  @apply justify-start text-black dark:text-white text-sm font-normal font-['Geist'];
+  @apply justify-start text-black dark:text-white text-sm font-normal font-geist;
 }
 .theme-card-des {
-  @apply self-stretch justify-start text-47gray dark:text-white/70 text-xs font-normal font-['Geist'];
+  @apply self-stretch justify-start text-47gray dark:text-white/70 text-xs font-normal font-geist;
 }
 
 .app-btn {
-  @apply justify-start h-[34px] text-white text-sm font-semibold font-['Geist'];
+  @apply justify-start h-[34px] text-white text-sm font-semibold font-geist;
 }
 
 .plus-btn {
@@ -286,12 +503,37 @@ body {
   @apply size-9 bg-primary items-center justify-center rounded-full border  border-newstroke backdrop-blur-[5px];
 }
 .member-avatar .mantine-Avatar-placeholder {
-  @apply text-white text-xl font-bold font-['Geist'];
+  @apply text-white text-xl font-bold font-geist;
 }
 
 .member-name {
-  @apply justify-start text-black dark:text-white text-sm font-medium font-['Geist'];
+  @apply justify-start text-black dark:text-white text-sm font-medium font-geist;
 }
 .member-email {
-  @apply justify-start text-black/50 dark:text-white/50 text-xs font-normal font-['Geist'];
+  @apply justify-start text-black/50 dark:text-white/50 text-xs font-normal font-geist;
+}
+
+.bill-modal-title {
+  @apply text-center justify-center text-black text-xl font-bold font-['Bonn_BF'];
+}
+
+.bill-btn {
+  @apply text-sm rounded-full font-semibold font-geist h-[34px];
+}
+
+.bill-card-price {
+  @apply text-primary text-xl font-bold font-['Bonn_BF'];
+}
+.bill-card-period {
+  @apply text-slate-500 text-[10px] font-medium font-geist;
+}
+.bill-card-badge {
+  @apply rounded-2xl px-2 h-[18px] py-1 bg-primary text-white text-[8px] font-medium font-geist;
+}
+
+.bill-card-title {
+  @apply justify-start text-47gray text-xl font-bold font-geist;
+}
+.bill-card-des {
+  @apply justify-start text-47gray text-sm font-normal font-geist;
 }

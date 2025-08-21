@@ -208,17 +208,17 @@ const MyTooltip = ({
   return (
     <div className='p-3 bg-white/50 dark:bg-black/50 rounded shadow-[0px_20px_40px_0px_rgba(15,23,42,0.15)] outline outline-[0.30px] outline-black/20 backdrop-blur-[5px] inline-flex flex-col justify-center items-start gap-2'>
       <div className='flex flex-col justify-center items-center gap-2'>
-        <div className="justify-start text-Black text-xs font-bold font-['Geist'] leading-none">
+        <div className='justify-start text-Black text-xs font-bold font-geist leading-none'>
           {month}
         </div>
       </div>
-      <div className="justify-start text-primary text-[10px] font-normal font-['Geist'] leading-none">
+      <div className='justify-start text-primary text-[10px] font-normal font-geist leading-none'>
         Total: {total}
       </div>
-      <div className="justify-start text-green-700 text-[10px] font-normal font-['Geist'] leading-none">
+      <div className='justify-start text-green-700 text-[10px] font-normal font-geist leading-none'>
         Subscribers: {subscribers}
       </div>
-      <div className="justify-start text-red text-[10px] font-medium font-['Geist']">
+      <div className='justify-start text-red text-[10px] font-medium font-geist'>
         Deleted:{deleted < 10 ? '0' + deleted : deleted}
       </div>
     </div>

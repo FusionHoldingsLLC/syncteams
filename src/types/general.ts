@@ -43,3 +43,11 @@ export interface CampaignConfig {
   icon: ReactNode
   sectionList: SectionItem[]
 }
+
+export type BillItem = {
+  price: number
+  isPopulate: boolean
+  type: string
+  description: string
+  sectionList: string[]
+}

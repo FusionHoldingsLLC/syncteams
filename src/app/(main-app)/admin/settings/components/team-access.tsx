@@ -108,7 +108,7 @@ const MemberCard = () => {
               <Text className='member-name'>Kolawole Adedeji</Text>
               <Box className='size- flex justify-start items-center gap-1'>
                 <Box className='size-1 bg-green-600 rounded-full' />
-                <Box className="justify-start text-green-600 text-[8px] font-medium font-['Geist']">
+                <Box className='justify-start text-green-600 text-[8px] font-medium font-geist'>
                   Online
                 </Box>
               </Box>
@@ -130,7 +130,7 @@ const MemberCard = () => {
         <Menu.Target>
           <UnstyledButton className='h-6 px-3 py-1  rounded-2xl app-border flex justify-center items-center gap-1'>
             <div className='h-6 px-3 py-1  rounded-[32px]   inline-flex justify-start items-center gap-1'>
-              <div className="justify-start text-47gray dark:text-white text-[10px] font-semibold font-['Geist']">
+              <div className='justify-start text-47gray dark:text-white text-[10px] font-semibold font-geist'>
                 Can Edit
               </div>
               <IconArrowDown className='stroke-black dark:stroke-white' />

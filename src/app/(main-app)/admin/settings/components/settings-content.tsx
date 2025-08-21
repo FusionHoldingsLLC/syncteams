@@ -5,7 +5,7 @@ import { useEffect, useMemo } from 'react'
 import { AppTabs } from 'src/components/others/app-tabs'
 import { DashboardHeader } from 'src/components/others/dashboard-header'
 import { useQueryParams } from 'src/hooks/logic/use-query-params'
-import { BillingSection } from './billing-section'
+import { BillingModal } from './billing-section'
 import { PreferenceSection } from './preference-section'
 import { ProfileSection } from './profile-section'
 import { TeamAccess } from './team-access'
@@ -19,7 +19,6 @@ const SettingsContent = () => {
       {
         label: 'Billing & Subscription',
         value: 'billing_subscription',
-        component: <BillingSection />,
       },
     ]
   }, [])
@@ -38,6 +37,8 @@ const SettingsContent = () => {
     <Box className='page-layout-wrapper gap-8'>
       <DashboardHeader title='Settings' description='Setting' />
       <AppTabs value={tab} customClassName='fill-tab' tabList={tabList} />
+
+      <BillingModal />
     </Box>
   )
 }

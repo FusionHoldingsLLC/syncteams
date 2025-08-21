@@ -32,3 +32,18 @@
     @apply text-white;
   }
 }
+
+.billing-tab .list {
+  @apply p-1 items-center justify-center rounded-full w-fit border-[0.5px] border-solid  border-app-border;
+}
+
+.billing-tab .indicator {
+  @apply bg-primary text-white rounded-full;
+}
+.billing-tab .tab {
+  @apply text-black text-sm font-bold dark:text-white/70  h-[34px] p-0 min-w-[89px];
+
+  &[data-active] {
+    @apply text-white;
+  }
+}

@@ -41,9 +41,7 @@ export const ProfileSection = () => {
             </Flex>
           </Flex>
           <Button className='s-profile-teams-btn'>
-            <Flex className="justify-start text-black text-sm font-semibold font-['Geist']">
-              ✨
-            </Flex>
+            <Flex className='justify-start text-black text-sm font-semibold font-geist'>✨</Flex>
             <Flex className='s-profile-teams-btn-text'>Teams</Flex>
           </Button>
         </Flex>
@@ -70,7 +68,7 @@ export const ProfileSection = () => {
         <Box className='w-full grid gap-4  md:grid-cols-2'>
           {inputList.map((item) => {
             return (
-              <Flex className='flex-col gap-2'>
+              <Flex key={item.label} className='flex-col gap-2'>
                 <TextInput
                   required={item.isRequired}
                   placeholder={item.placeholder}

@@ -9,6 +9,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        bonn: ['Bonn BF', 'sans-serif'],
+        geist: ['Geist', 'sans-serif'],
+        helvetica: ['Helvetica Neue', 'sans-serif'],
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
