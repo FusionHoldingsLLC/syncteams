@@ -180,8 +180,8 @@ export const UserChart: React.FC = () => {
             <IconAddUser className='stroke-primary ' />
           </Box>
           <Box>
-            <Text className='!text-base !font-semibold default-text'>New Users</Text>
-            <Text className='!ext-base !font-semibold default-text'>2025</Text>
+            <Text className=' default-text new-text'>New Users</Text>
+            <Text className='default-text new-text'>2025</Text>
           </Box>
         </Box>
         <ArrowBtn title='Go to Users' />

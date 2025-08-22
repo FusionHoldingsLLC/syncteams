@@ -1,9 +1,9 @@
 import { Anchor, Button, Divider, Flex, PasswordInput, Text, TextInput } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
 
-import { useLoginMutation } from '@/graphql/generated'
 import { IconGoogle } from '@/public/assets/svgs/icon-google'
 import { useNavigation } from 'src/hooks/logic/use-navigation'
+import { useLoginMutateHook } from 'src/hooks/mutates/use-auth'
 import { routes } from 'src/lib/routes'
 import { FormLoginValue } from 'src/types/auth'
 
@@ -14,25 +14,22 @@ type Props = {
 const AuthContent = ({ form }: Props) => {
   const { navigate } = useNavigation()
 
-  const [login, { data, loading, error }] = useLoginMutation()
+  const { onLoin, onCheckUser, loading } = useLoginMutateHook()
 
   const handleSubmit = async (value: FormLoginValue) => {
-    try {
-      const response = await login({
-        variables: {
-          input: {
-            email: 'Johnamehgregameh@gmail.com',
-            password: 'Francium9@',
-          },
-        },
-      })
+    // onLoin({
+    //   variables: {
+    //     input: value,
+    //   },
+    // })
 
-      console.log(response)
-      // console.log('Login successful:', response.data?.login)
-      // localStorage.setItem('token', response.data?.login.token || '')
-    } catch (err) {
-      console.error('Login failed:', err)
-    }
+    onCheckUser({
+      variables: {
+        input: {
+          email: value.email,
+        },
+      },
+    })
   }
 
   return (
@@ -49,6 +46,7 @@ const AuthContent = ({ form }: Props) => {
         className='w-full'
         placeholder='Enter email Address'
         label='Email'
+        size='xs'
       />
 
       <PasswordInput
@@ -56,11 +54,12 @@ const AuthContent = ({ form }: Props) => {
         className='w-full'
         placeholder='Enter password'
         label='Password'
+        size='xs'
       />
       <Flex className='justify-end'>
         <Anchor className='sm-text'>Forgot password?</Anchor>
       </Flex>
-      <Button loading={loading} variant='primary' type='submit' className='w-full'>
+      <Button size='xs' loading={loading} variant='primary' type='submit' className='w-full'>
         Continue
       </Button>
 

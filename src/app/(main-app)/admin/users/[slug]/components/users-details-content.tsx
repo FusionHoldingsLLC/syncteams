@@ -7,26 +7,29 @@ import { DashboardCard } from 'src/components/cards/dashboard-card'
 import { DashboardHeader } from 'src/components/others/dashboard-header'
 import { routes } from 'src/lib/routes'
 import { DetailsHeader } from './details-header'
+import { RecentUserActivities } from './recent-user-activities'
+import { SystemActivities } from './system-activities'
+import UsageStatisticsChart from './user-statisitic-chart'
 
 const dashboardCards = [
   {
-    title: 'Total Users',
-    value: '5,876',
+    title: 'Deployed Workflow',
+    value: '35',
     icon: <IconWayPoint className='stroke-primary dark:stroke-white' />,
   },
   {
-    title: 'New Users',
-    value: '5,876',
-    icon: <IconWayPoint className='stroke-primary dark:stroke-white' />,
-  },
-  {
-    title: 'Active Agents',
-    value: '5,440',
+    title: 'Time Spent',
+    value: '75h',
     icon: <IconWayPoint className='stroke-primary dark:stroke-white' />,
   },
   {
     title: 'Workflows',
-    value: '33',
+    value: '23',
+    icon: <IconWayPoint className='stroke-primary dark:stroke-white' />,
+  },
+  {
+    title: 'Usage Frequency',
+    value: '20%',
     icon: <IconWayPoint className='stroke-primary dark:stroke-white' />,
   },
 ]
@@ -53,6 +56,18 @@ const UsersDetailsContent = () => {
           />
         ))}
       </Box>
+
+      <Box className='gap-3 flex-1  grid-cols-1 grid lg:grid-cols-[1fr_300px] w-full'>
+        <Box className='app-border  grid-cols-1 grid lg:grid-cols-[379px_1fr] py-[24px] px-[20px] gap-[20px] rounded-[12px]'>
+          <UsageStatisticsChart />
+          <RecentUserActivities />
+        </Box>
+        <Box className='flex flex-col gap-3'>
+          <SystemActivities />
+        </Box>
+      </Box>
+
+      <AccountSettings />
     </Box>
   )
 }
@@ -72,5 +87,125 @@ const PerCard = () => {
         </Box>
       </Box>
     </Flex>
+  )
+}
+
+import { Select, Switch, Textarea, TextInput } from '@mantine/core'
+
+const sections = [
+  {
+    title: 'Account Details',
+    fields: (
+      <Box className='space-y-4'>
+        <Select
+          classNames={{
+            input: 'secondary-bg',
+          }}
+          label='Account status'
+          data={['Active', 'Inactive', 'Suspended']}
+          defaultValue='Active'
+        />
+        <Select
+          classNames={{
+            input: 'secondary-bg',
+          }}
+          label='Subscription plan'
+          data={['Free', 'Pro', 'Enterprise']}
+          defaultValue='Pro'
+        />
+        <TextInput
+          classNames={{
+            input: 'secondary-bg',
+          }}
+          label='Registration date'
+          value='07/04/2025'
+          disabled
+          description='Registration date can not be modified'
+        />
+      </Box>
+    ),
+  },
+  {
+    title: 'Usage Limits',
+    fields: (
+      <Box className='space-y-4'>
+        <TextInput
+          classNames={{
+            input: 'secondary-bg',
+          }}
+          label='Total workflows'
+          value='63'
+        />
+        <TextInput
+          classNames={{
+            input: 'secondary-bg',
+          }}
+          label='Total agents'
+          value='10'
+        />
+        <TextInput
+          classNames={{
+            input: 'secondary-bg',
+          }}
+          label='Maximum workflows'
+          value='68'
+        />
+        <TextInput
+          classNames={{
+            input: 'secondary-bg',
+          }}
+          label='API requests per day'
+          value='20'
+        />
+      </Box>
+    ),
+  },
+  {
+    title: 'Access Permissions',
+    fields: (
+      <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
+        <Switch label='Total workflows' defaultChecked />
+        <Switch label='Create custom integrations' />
+        <Switch label='Access advanced models' />
+        <Switch label='Access API Workflows' defaultChecked />
+        <Switch label='Access analytics' defaultChecked />
+        <Switch label='Team collaboration' defaultChecked />
+      </div>
+    ),
+  },
+  {
+    title: 'Admin Notes',
+    fields: (
+      <Textarea
+        classNames={{
+          input: 'secondary-bg',
+        }}
+        label='Notes (Only visible to admins)'
+        autosize
+        minRows={3}
+        defaultValue='Power user who creates marketing campaigns and automation workflows. Pro account with custom model permissions.'
+      />
+    ),
+  },
+]
+
+const AccountSettings = () => {
+  return (
+    <div className='space-y-6'>
+      {sections.map((section, i) => (
+        <Box key={i} className='space-y-4 app-border rounded-[12px] px-[20px] py-[24px]'>
+          {/* Section header */}
+          <Box className='flex items-center gap-3 w-full'>
+            <Box className='size-5 secondary-bg flex items-center rounded justify-center'>
+              <IconWayPoint className='stroke-primary dark:stroke-white' />
+            </Box>
+            <Text className='dashboard-top-card-title'>{section.title}</Text>
+          </Box>
+
+          {/* Section fields */}
+          {section.fields}
+        </Box>
+      ))}
+    </div>
   )
 }

@@ -10,56 +10,56 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @font-face {
-  font-family: 'Bonn BF';
+  font-family: 'Bonn';
   src: url('/fonts/Boon/Bonn BF Thin.otf') format('opentype');
   font-weight: 100;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Bonn BF';
+  font-family: 'Bonn';
   src: url('/fonts/Boon/Bonn BF ExtraLight.otf') format('opentype');
   font-weight: 200;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Bonn BF';
+  font-family: 'Bonn';
   src: url('/fonts/Boon/Bonn BF Light.otf') format('opentype');
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Bonn BF';
+  font-family: 'Bonn';
   src: url('/fonts/Boon/Bonn BF Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Bonn BF';
+  font-family: 'Bonn';
   src: url('/fonts/Boon/Bonn BF Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Bonn BF';
+  font-family: 'Bonn';
   src: url('/fonts/Boon/Bonn BF Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Bonn BF';
+  font-family: 'Bonn';
   src: url('/fonts/Boon/Bonn BF Black.otf') format('opentype');
   font-weight: 900;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Bonn BF';
+  font-family: 'Bonn';
   src: url('/fonts/Boon/Bonn BF Ultra.otf') format('opentype');
   font-weight: 950;
   font-style: normal;
@@ -267,7 +267,7 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-bonn: 'Bonn B', 'san';
+  --font-bonn: 'Bonn', 'san';
   --font-geist: 'Geist', 'san';
   --font-helvetica: 'Helvetica Neue', 'san';
 }
@@ -299,7 +299,7 @@ body {
 }
 
 .auth-title {
-  @apply text-[20px] font-bold dark:text-white text-black;
+  @apply text-[20px] font-bonn font-bold dark:text-white text-black;
 }
 
 .sm-text {
@@ -321,20 +321,20 @@ body {
 }
 
 .page-title {
-  @apply text-black-1 dark:text-white text-xl font-bold leading-[normal];
+  @apply text-black-1 dark:text-white;
 }
 .page-des {
-  @apply text-grayed dark:text-white/60 text-xs font-medium leading-[normal];
+  @apply text-grayed dark:text-white/60;
 }
 
 .dashboard-top-card {
   @apply flex flex-col     items-center  overflow-hidden rounded-xl;
 }
 .dashboard-top-card-title {
-  @apply text-sm font-semibold text-black dark:text-white;
+  @apply text-xs font-medium text-black dark:text-white font-bonn;
 }
 .dashboard-top-card-value {
-  @apply text-3xl font-bold text-black dark:text-white;
+  @apply text-3xl font-bold text-black dark:text-white font-bonn;
 }
 
 .default-text {
@@ -342,7 +342,7 @@ body {
 }
 
 .arrow-btn {
-  @apply text-primary h-[30px]  text-xs px-0 font-medium transition-all  hover:scale-105;
+  @apply text-primary h-[30px]  text-[10px] px-0 font-medium transition-all  hover:scale-105;
 }
 
 .table-header-text {
@@ -383,7 +383,7 @@ body {
 }
 
 .dashboard-card-header-text {
-  @apply text-sm font-bold text-black dark:text-white;
+  @apply text-sm font-medium text-black dark:text-white font-bonn;
 }
 
 .page-layout-wrapper {
@@ -545,5 +545,45 @@ body {
 }
 
 .dash-text-this {
-  @apply text-center justify-start dark:text-white/50 text-grayed text-xs font-medium font-['Geist'];
+  @apply text-center justify-start dark:text-white/50 text-grayed text-xs font-medium font-geist;
+}
+
+.new-text {
+  @apply text-base font-bonn font-medium;
+}
+
+.r-u-a-date {
+  @apply self-stretch justify-start text-greyed text-[10px] font-medium font-geist;
+}
+.r-u-a-title {
+  @apply self-stretch justify-start text-black text-xs font-medium font-geist;
+}
+.r-u-a-des {
+  @apply self-stretch justify-start text-greyed text-xs font-medium font-geist;
+}
+
+.r-u-a-card {
+  @apply relative;
+}
+
+.r-u-a-gradient-dot {
+  @apply size-[5px]  bg-linear-270 from-violet-300 to-indigo-500 rounded-full absolute top-1 z-20 -left-[30.5px];
+}
+
+.r-u-drop-input {
+  @apply justify-start hover:scale-105 w-fit px-1.5 py-0 h-[20px] hover:bg-transparent  bg-transparent dark:text-white hover:text-greyed dark:hover:text-white text-greyed text-[10px] font-medium font-['Geist'] outline-[0px] border-[0px] text-end bg-cyan-300;
+}
+.user-setting-input {
+  @apply bg-[#F2FAFD];
+}
+
+.u-hero-email {
+  @apply justify-start text-greyed text-xs dark:text-white/50 font-medium font-geist;
+}
+.u-hero-name {
+  @apply justify-start font-bonn text-black dark:text-white text-base !font-[700];
+}
+
+.auth-left-section {
+  @apply hidden lg:block;
 }

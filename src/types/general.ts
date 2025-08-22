@@ -34,6 +34,7 @@ export interface SectionItem {
   value: string
   label: string
   component?: JSX.Element
+  icon?: JSX.Element
 }
 
 export interface CampaignConfig {
@@ -50,4 +51,19 @@ export type BillItem = {
   type: string
   description: string
   sectionList: string[]
+}
+
+export type ApiError = {
+  response?: {
+    data?: {
+      error?: string | Record<string, unknown>
+      message?: string | Record<string, unknown>
+      [key: string]: unknown
+    }
+    status?: number
+    [key: string]: unknown
+  }
+  status?: number
+  message?: string
+  [key: string]: unknown
 }

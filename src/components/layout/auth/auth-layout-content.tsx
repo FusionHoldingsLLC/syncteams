@@ -1,14 +1,4 @@
-import {
-  Anchor,
-  Box,
-  Button,
-  Center,
-  Container,
-  Flex,
-  Group,
-  ScrollArea,
-  Text,
-} from '@mantine/core'
+import { Anchor, Box, Center, Container, Flex, Image, ScrollArea, Text } from '@mantine/core'
 import { PropsWithChildren, useMemo } from 'react'
 import { CompanyLogo } from 'src/components/others/company-logo'
 import useDarkMode from 'src/hooks/logic/use-dark-mode'
@@ -18,7 +8,7 @@ type Props = {
 }
 
 const AuthLayoutContent = ({ children }: PropsWithChildren<Props>) => {
-  const { isDarkMode, changeMode } = useDarkMode()
+  const { isDarkMode } = useDarkMode()
 
   const getImage = useMemo(() => {
     return isDarkMode
@@ -28,30 +18,16 @@ const AuthLayoutContent = ({ children }: PropsWithChildren<Props>) => {
   return (
     <Box className='grid h-screen w-full lg:grid-cols-2 overflow-hidden'>
       {/* Left Side Graphic */}
-      <Center className='py-4'>
-        <Center
-          className='auth-left bg-no-repeat  bg-contain h-full w-full'
-          style={{ backgroundImage: `url(${getImage})` }}
-        />
+      <Center className='py-4  auth-left-section'>
+        <Image src={getImage} className='w-full h-screen' />
       </Center>
 
       {/* Right Side Content */}
-      <ScrollArea
-        scrollbars='y'
-        scrollbarSize={6}
-        className='flex flex-col  px-8 md:px-8 overflow-y-auto '
-      >
+      <ScrollArea scrollbars='y' scrollbarSize={6} className='flex flex-col overflow-y-auto '>
         <Box className='flex flex-col min-h-screen'>
           {/* Header */}
           <Box className='sticky py-4 flex justify-between top-0 z-10 w-full background '>
-            <CompanyLogo />
-            {true && (
-              <Group>
-                <Button variant='primary' onClick={() => changeMode()}>
-                  {isDarkMode ? 'Light' : 'Dark'}
-                </Button>
-              </Group>
-            )}{' '}
+            <CompanyLogo className='w-[120px]' />
           </Box>
 
           {/* Main Content */}

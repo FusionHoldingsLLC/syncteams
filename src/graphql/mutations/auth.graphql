@@ -7,3 +7,25 @@ mutation Login($input: LoginInput!) {
     profileCompleted
   }
 }
+
+mutation CheckUser($input: CheckUserInput!) {
+  checkUser(input: $input)
+}
+
+mutation CreateUser($input: CreateUserInput!) {
+  createUser(input: $input) {
+    email
+  }
+}
+
+mutation ResendVerificationEmail($input: ResendVerificationInput!) {
+  resendVerificationEmail(input: $input) {
+    email
+  }
+}
+
+mutation VerifyEmail($input: VerifyEmailInput!) {
+  verifyEmail(input: $input) {
+    email
+  }
+}

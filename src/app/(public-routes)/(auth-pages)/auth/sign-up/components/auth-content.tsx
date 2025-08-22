@@ -1,82 +1,57 @@
-import { Box, Button, Divider, PasswordInput, Text, TextInput, Transition } from '@mantine/core'
+'use client'
+
 import { useForm } from '@mantine/form'
-
-import { IconGoogle } from '@/public/assets/svgs/icon-google'
 import { yupResolver } from 'mantine-form-yup-resolver'
-import { useEffect, useState } from 'react'
-import { FormLoginValue } from 'src/types/auth'
+import { useCallback, useMemo, useState } from 'react'
+import { useNavigation } from 'src/hooks/logic/use-navigation'
+import { routes } from 'src/lib/routes'
 import { initialValues, validationSchemas } from 'src/validators/auth'
+import { AuthHeader } from './auth-header'
+import OtpContent from './otp-content'
+import ProfileContent from './profile-content'
+import { SingUpForm } from './signup-form'
+import SurveyContent from './survey-content'
 
-type Props = {
-  onSuccess: () => void
-}
-
-const AuthContent = ({ onSuccess }: Props) => {
-  const [animate, setAnimate] = useState(false)
-
+const AuthContent = () => {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const { navigate } = useNavigation()
   const form = useForm({
     initialValues: initialValues.signUp,
     validate: yupResolver(validationSchemas.signUp),
   })
-  const handleSubmit = async (value: FormLoginValue) => {
-    console.log(value)
-    onSuccess()
+
+  const contentList = useCallback(() => {
+    return [
+      {
+        title: 'Let’s create your Account.',
+        component: <SingUpForm formik={form} onSuccess={() => setCurrentIndex(1)} />,
+      },
+      {
+        title: 'Email Verification',
+        component: <OtpContent email={form.values.email} onSuccess={() => setCurrentIndex(2)} />,
+      },
+      {
+        title: 'Complete your Profile',
+        component: <ProfileContent onSuccess={() => setCurrentIndex(3)} />,
+      },
+      { title: 'Onboarding Survey', component: <SurveyContent onSuccess={() => {}} /> },
+    ]
+  }, [form])
+
+  const currentComponent = useMemo(() => {
+    const current = contentList()[currentIndex]
+    return current
+  }, [currentIndex, contentList])
+
+  const handleBack = () => {
+    if (currentIndex === 0) return navigate(routes.auth.login)
+    return setCurrentIndex((prev) => prev - 1)
   }
-
-  useEffect(() => {
-    setAnimate(true)
-  }, [])
-
   return (
-    <Transition mounted={animate} transition='fade-right' duration={400} timingFunction='ease'>
-      {(styles) => (
-        <form
-          className=' auth-wrapper'
-          onSubmit={form.onSubmit(handleSubmit)}
-          style={{ position: 'relative', ...styles }}
-        >
-          <TextInput
-            {...form.getInputProps('email')}
-            className='w-full'
-            placeholder='Enter email Address'
-            label='Email'
-          />
-
-          <Box className='flex flex-col gap-1'>
-            <PasswordInput
-              {...form.getInputProps('password')}
-              className='w-full'
-              placeholder='Enter password'
-              label='Password'
-            />
-            <Text className='!text-[#94A3B8] sm-text '>Password must be minimum of 8 digits</Text>
-          </Box>
-
-          <PasswordInput
-            {...form.getInputProps('confirmPassword')}
-            className='w-full'
-            placeholder='Re-enter Password'
-            label='Confirm Password'
-          />
-
-          <Button variant='primary' type='submit' className='w-full'>
-            Continues
-          </Button>
-
-          <Divider
-            my='xs'
-            label='OR'
-            className='text-[#71717A] !my-4 '
-            classNames={{}}
-            labelPosition='center'
-          />
-
-          <Button leftSection={<IconGoogle />} variant='light' className='w-full'>
-            Continue with Google
-          </Button>
-        </form>
-      )}
-    </Transition>
+    <>
+      <AuthHeader onBackClick={handleBack} title={currentComponent?.title} />
+      {currentComponent?.component}
+    </>
   )
 }
 

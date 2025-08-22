@@ -45,7 +45,7 @@ export const DashboardInsight = () => {
   return (
     <Box className='app-border p-4 rounded-lg'>
       <Flex className='justify-between items-center mb-[10px] gap-4 flex-wrap'>
-        <Text className='!text-sm !font-semibold default-text'>Actionable Insights</Text>
+        <Text className='text-card-header default-text'>Actionable Insights</Text>
         <ArrowBtn title='View churn data' />
       </Flex>
       <Box className='grid grid-cols-1 gap-4 sm:grid-cols-2'>

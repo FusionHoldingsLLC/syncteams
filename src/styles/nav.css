@@ -82,7 +82,7 @@
 }
 
 .side-nav-links-btn {
-  @apply bg-transparent  duration-300 gap-2 py-3 p-2  text-sm font-bold flex items-center transition-all w-full hover:bg-brandblue2/5 border-[0.5px] border-transparent hover:border-primary rounded-sm;
+  @apply bg-transparent text-47gray dark:text-white font-geist duration-300 gap-2 py-3 p-2  text-sm font-bold flex items-center transition-all w-full hover:bg-brandblue2/5 border-[0.5px] border-transparent hover:border-primary rounded-sm;
 }
 .side-nav-links-btn[data-active='true'] {
   @apply text-primary transition-all duration-300;
@@ -92,7 +92,7 @@
 }
 
 .side-nav-links-text {
-  @apply text-sm font-bold;
+  @apply text-sm  font-bold;
 }
 .side-nav-links-text[data-collapse='true'] {
   @apply md:hidden;

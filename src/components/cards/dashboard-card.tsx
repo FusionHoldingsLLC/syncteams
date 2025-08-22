@@ -5,7 +5,7 @@ interface DashboardCardProps {
   title: string
   value: string | number
   icon?: ReactNode
-  footerComponent: ReactNode
+  footerComponent?: ReactNode
   patchClassName?: string
 }
 

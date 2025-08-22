@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Flex } from '@mantine/core'
+import { Avatar, Box, Button, Flex, Text } from '@mantine/core'
 
 export const DetailsHeader = () => {
   return (
@@ -7,10 +7,8 @@ export const DetailsHeader = () => {
         <div className='flex  justify-start flex-wrap items-center gap-5'>
           <Avatar className='user-detail-header-avatar'>MK</Avatar>
           <div className='inline-flex flex-col justify-center items-start gap-3'>
-            <p className='justify-start font-bonn text-black text-base !font-[700] '>Jane Doe</p>
-            <div className='justify-start text-greyed text-xs font-medium font-geist'>
-              janedoe@gmail.com
-            </div>
+            <Text className='u-hero-name '>Jane Doe</Text>
+            <Text className='u-hero-email'>janedoe@gmail.com</Text>
             <div className='inline-flex flex-wrap justify-start items-start gap-4'>
               <div className='px-3 py-1 bg-green-700/10 rounded-xl flex justify-center items-center gap-2.5'>
                 <div className='justify-start text-green-700 text-xs font-medium font-geist'>
@@ -23,7 +21,7 @@ export const DetailsHeader = () => {
                 </div>
               </div>
               <div className='px-3 py-1 bg-zinc-700/10 rounded-xl flex justify-center items-center gap-2.5'>
-                <div className='w-20 justify-start text-zinc-700 text-xs font-medium font-geist'>
+                <div className='w-20 justify-start dark:text-white/35 text-zinc-700 text-xs font-medium font-geist'>
                   09/03/2025
                 </div>
               </div>
