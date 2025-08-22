@@ -82,10 +82,10 @@
 }
 
 .side-nav-links-btn {
-  @apply bg-transparent gap-2 py-3 p-2  text-sm font-bold flex items-center transition-all w-full hover:bg-brandblue2/5 rounded-sm;
+  @apply bg-transparent  duration-300 gap-2 py-3 p-2  text-sm font-bold flex items-center transition-all w-full hover:bg-brandblue2/5 border-[0.5px] border-transparent hover:border-primary rounded-sm;
 }
 .side-nav-links-btn[data-active='true'] {
-  @apply text-primary;
+  @apply text-primary transition-all duration-300;
 }
 .side-nav-links-btn[data-collapse='true'] {
   @apply md:items-center md:justify-center;

@@ -37,8 +37,10 @@ const SettingsContent = () => {
     <Box className='page-layout-wrapper gap-8'>
       <DashboardHeader title='Settings' description='Setting' />
       <AppTabs value={tab} customClassName='fill-tab' tabList={tabList} />
-
-      <BillingModal />
+      <BillingModal
+        open={Boolean(tab === 'billing_subscription')}
+        onClose={() => setParam('t', 'profile')}
+      />
     </Box>
   )
 }

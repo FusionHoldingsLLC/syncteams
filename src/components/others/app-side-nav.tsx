@@ -70,7 +70,7 @@ export const AppSideNav: React.FC<Props> = ({ navList }) => {
           scrollbarSize={2}
           className='side-links custom-scrollbar p-2 gap-4'
         >
-          <Flex className='flex-col'>{links()}</Flex>
+          <Flex className='flex-col gap-1'>{links()}</Flex>
         </ScrollArea>
         <UserCardDetail />
       </nav>

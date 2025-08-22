@@ -87,7 +87,7 @@ const InsightCard = ({ section }: { section: CampaignConfig }) => {
         })}
       </Box>
 
-      <Button>{section.btnText}</Button>
+      <Button variant='primary'>{section.btnText}</Button>
     </Box>
   )
 }

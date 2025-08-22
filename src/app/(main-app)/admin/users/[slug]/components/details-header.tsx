@@ -34,7 +34,9 @@ export const DetailsHeader = () => {
           </div>
         </div>
         <Flex className='justify-center flex-wrap items-center gap-5'>
-          <Button className='user-detail-header-btn'>Message</Button>
+          <Button variant='primary' className='user-detail-header-btn'>
+            Message
+          </Button>
           <Button variant='outline' className='user-detail-header-btn'>
             Edit Profile
           </Button>

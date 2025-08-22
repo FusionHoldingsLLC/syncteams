@@ -2,27 +2,35 @@ import { SVGProps } from 'react'
 
 export const IconLogout = (props: SVGProps<SVGSVGElement>) => {
   return (
-    <div data-svg-wrapper className='relative'>
-      <svg
-        {...props}
-        width='24'
-        height='24'
-        viewBox='0 0 24 24'
-        fill='none'
-        xmlns='http://www.w3.org/2000/svg'
-      >
-        <path
-          d='M9 4.5H8C5.64298 4.5 4.46447 4.5 3.73223 5.23223C3 5.96447 3 7.14298 3 9.5V14.5C3 16.857 3 18.0355 3.73223 18.7678C4.46447 19.5 5.64298 19.5 8 19.5H9'
-          stroke='#EB5757'
-          strokeWidth='1.5'
-        />
-        <path
-          d='M9 6.4764C9 4.18259 9 3.03569 9.70725 2.4087C10.4145 1.78171 11.4955 1.97026 13.6576 2.34736L15.9864 2.75354C18.3809 3.17118 19.5781 3.37999 20.2891 4.25826C21 5.13652 21 6.40672 21 8.94711V15.0529C21 17.5933 21 18.8635 20.2891 19.7417C19.5781 20.62 18.3809 20.8288 15.9864 21.2465L13.6576 21.6526C11.4955 22.0297 10.4145 22.2183 9.70725 21.5913C9 20.9643 9 19.8174 9 17.5236V6.4764Z'
-          stroke='#EB5757'
-          strokeWidth='1.5'
-        />
-        <path d='M12 11V13' stroke='#EB5757' strokeWidth='1.5' strokeLinecap='round' />
-      </svg>
-    </div>
+    <svg
+      width={16}
+      height={16}
+      viewBox='0 0 16 16'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+      {...props}
+    >
+      <path
+        d='M6 14H3.33333C2.97971 14 2.64057 13.8595 2.39052 13.6095C2.14048 13.3594 2 13.0203 2 12.6667V3.33333C2 2.97971 2.14048 2.64057 2.39052 2.39052C2.64057 2.14048 2.97971 2 3.33333 2H6'
+        stroke='#FF0000'
+        strokeWidth={1.5}
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M10.666 11.3346L13.9993 8.0013L10.666 4.66797'
+        stroke='#FF0000'
+        strokeWidth={1.5}
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M14 8H6'
+        stroke='#FF0000'
+        strokeWidth={1.5}
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+    </svg>
   )
 }

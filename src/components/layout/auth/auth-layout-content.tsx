@@ -47,7 +47,9 @@ const AuthLayoutContent = ({ children }: PropsWithChildren<Props>) => {
             <CompanyLogo />
             {true && (
               <Group>
-                <Button onClick={() => changeMode()}>{isDarkMode ? 'Light' : 'Dark'}</Button>
+                <Button variant='primary' onClick={() => changeMode()}>
+                  {isDarkMode ? 'Light' : 'Dark'}
+                </Button>
               </Group>
             )}{' '}
           </Box>

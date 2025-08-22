@@ -1,0 +1,41 @@
+/* Typography Classes */
+
+/* Primary Typeface Header */
+.text-header {
+  @apply text-[20px] font-bonn font-bold;
+}
+
+/* Primary Typeface Header Subtitle */
+.text-header-subtitle {
+  @apply text-[16px] font-medium;
+}
+
+/* Card Header */
+.text-card-header {
+  @apply text-[12px] font-bonn font-medium;
+}
+
+/* Main Body Text */
+.text-body {
+  @apply text-[14px] font-geist font-normal;
+}
+
+/* CTA Button Text */
+.text-cta {
+  @apply text-[14px] font-geist font-semibold;
+}
+
+/* Body Typeface (Bold) */
+.text-body-bold {
+  @apply text-[12px] font-geist font-bold;
+}
+
+/* Body Typeface (Medium) */
+.text-body-medium {
+  @apply text-[12px] font-geist font-medium;
+}
+
+/* Body Typeface (Small) */
+.text-body-small {
+  @apply text-[10px] font-geist font-medium;
+}

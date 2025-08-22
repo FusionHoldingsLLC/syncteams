@@ -1,7 +1,6 @@
 import { IconLeftLong } from '@/public/assets/svgs/icom-arrow-left-long'
 import { Button, Flex, Text } from '@mantine/core'
 import { useParams, useRouter } from 'next/navigation'
-import useDarkMode from 'src/hooks/logic/use-dark-mode'
 
 interface Props {
   title?: string
@@ -20,7 +19,6 @@ export const DashboardHeader: React.FC<Props> = ({
   const router = useRouter()
 
   const slug = params?.slug // Get the slug from the URL
-  const { isDarkMode, changeMode } = useDarkMode()
 
   return (
     <>
@@ -29,8 +27,6 @@ export const DashboardHeader: React.FC<Props> = ({
           <Text className='page-title !mb-1'>{title}</Text>
           <Text className='page-des'>{description}</Text>
         </Flex>
-
-        <Button onClick={() => changeMode()}>{isDarkMode ? 'Light' : 'Dark'}</Button>
 
         {rightSection && rightSection}
       </Flex>

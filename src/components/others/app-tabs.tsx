@@ -37,7 +37,7 @@ export const AppTabs: React.FC<Props> = ({
   }
 
   const testValue = useMemo(() => {
-    return tabValue
+    return !disableParams ? value : tabValue
   }, [value, tabValue])
 
   return (

@@ -5,27 +5,34 @@ interface DashboardCardProps {
   title: string
   value: string | number
   icon?: ReactNode
-  accentColor?: string // customizable top bar
+  footerComponent: ReactNode
+  patchClassName?: string
 }
 
 export const DashboardCard: FC<DashboardCardProps> = ({
   title,
+  patchClassName,
+  footerComponent,
   value,
   icon,
-  accentColor = '#91d8f7',
 }) => {
   return (
     <Box className='dashboard-top-card app-border '>
-      <Box className='flex flex-col w-full gap-4'>
-        <Box className='flex items-center gap-3 w-full'>
-          <Box className=' size-5 secondary-bg flex items-center  rounded justify-center'>
-            {icon}
+      <Box className={`bg-brandblue3  h-[5px] w-full ${patchClassName}`} />
+      <Box className='px-[15px] pb-[15px] w-full pt-[15px]'>
+        <Box className='flex flex-col w-full gap-4'>
+          <Box className='flex items-center gap-3 w-full'>
+            <Box className=' size-5 secondary-bg flex items-center  rounded justify-center'>
+              {icon}
+            </Box>
+
+            <Text className='dashboard-top-card-title'>{title}</Text>
           </Box>
 
-          <Text className='dashboard-top-card-title'>{title}</Text>
-        </Box>
+          <Text className='dashboard-top-card-value'>{value}</Text>
 
-        <Text className='dashboard-top-card-value'>{value}</Text>
+          {footerComponent}
+        </Box>
       </Box>
     </Box>
   )

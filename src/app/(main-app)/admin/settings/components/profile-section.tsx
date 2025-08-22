@@ -40,7 +40,7 @@ export const ProfileSection = () => {
               <Text className='s-profile-email '>AdekolaSeye@gmail.com</Text>
             </Flex>
           </Flex>
-          <Button className='s-profile-teams-btn'>
+          <Button variant='primary' className='s-profile-teams-btn'>
             <Flex className='justify-start text-black text-sm font-semibold font-geist'>✨</Flex>
             <Flex className='s-profile-teams-btn-text'>Teams</Flex>
           </Button>

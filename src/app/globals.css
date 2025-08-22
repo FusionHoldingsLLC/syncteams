@@ -5,6 +5,7 @@
 @import '../styles/mantine.css';
 @import '../styles/nav.css';
 @import '../styles/tab.css';
+@import '../styles/typography.css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -262,6 +263,7 @@
   --color-newstroke: #d1d1d1;
   --color-gray-complimentary: #474747;
   --color-app-border: rgba(196, 196, 196, 0.5);
+  --color-greyed: #777777;
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -326,7 +328,7 @@ body {
 }
 
 .dashboard-top-card {
-  @apply flex flex-col border-t-[5px] px-[15px] pb-[15px] pt-[15px]  border-t-brandblue3   items-center  overflow-hidden rounded-xl;
+  @apply flex flex-col     items-center  overflow-hidden rounded-xl;
 }
 .dashboard-top-card-title {
   @apply text-sm font-semibold text-black dark:text-white;
@@ -514,7 +516,7 @@ body {
 }
 
 .bill-modal-title {
-  @apply text-center justify-center text-black text-xl font-bold font-['Bonn_BF'];
+  @apply text-center justify-center text-black dark:text-white text-xl font-bold font-['Bonn_BF'];
 }
 
 .bill-btn {
@@ -525,15 +527,23 @@ body {
   @apply text-primary text-xl font-bold font-['Bonn_BF'];
 }
 .bill-card-period {
-  @apply text-slate-500 text-[10px] font-medium font-geist;
+  @apply text-slate-500 dark:text-slate-200 text-[10px] font-medium font-geist;
 }
 .bill-card-badge {
   @apply rounded-2xl px-2 h-[18px] py-1 bg-primary text-white text-[8px] font-medium font-geist;
 }
 
 .bill-card-title {
-  @apply justify-start text-47gray text-xl font-bold font-geist;
+  @apply justify-start text-47gray dark:text-white text-xl font-bold font-geist;
 }
 .bill-card-des {
-  @apply justify-start text-47gray text-sm font-normal font-geist;
+  @apply justify-start text-47gray dark:text-white text-sm font-normal font-geist;
+}
+
+.bill-card {
+  @apply p-4 hover:scale-105 xl:p-8 transition-all duration-500 inline-flex flex-col justify-start items-start gap-8 hover:border-primary;
+}
+
+.dash-text-this {
+  @apply text-center justify-start dark:text-white/50 text-grayed text-xs font-medium font-['Geist'];
 }

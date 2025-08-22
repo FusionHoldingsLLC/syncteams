@@ -51,7 +51,11 @@ export const TeamAccess = () => {
           <Text className='s-settings-title'> Workspace Settings</Text>
           <Text className='s-settings-des'> General workspace configuration and policies.</Text>
         </Flex>
-        <Button className='app-btn' leftSection={<IconPlus className='stroke-white size-4' />}>
+        <Button
+          variant='primary'
+          className='app-btn'
+          leftSection={<IconPlus className='stroke-white size-4' />}
+        >
           Create New Team
         </Button>
       </Flex>

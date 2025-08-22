@@ -1,29 +1,33 @@
-.mantine-input > .input {
-  @apply h-[37px];
-}
-
 .mantine-TextInput-label {
   @apply text-sm font-medium;
 }
 .mantine-Select-label {
   @apply text-sm font-medium;
 }
-.input {
-  @apply h-[37px];
+
+.mantine-Button-root {
+  @apply h-[37px] transition-all duration-300 hover:scale-[1.01]  transition-all  text-sm rounded-md font-semibold;
 }
-.mantine-btn {
-  @apply h-[37px] hover:scale-[1.01]  transition-all  text-sm rounded-md font-semibold;
+.mantine-Button-root[data-variant='primary'] {
+  @apply hover:bg-black hover:text-white dark:hover:bg-primary/20;
+}
+.mantine-Button-root[data-variant='light'] {
+  @apply hover:bg-primary hover:text-white;
+}
+
+.mantine-Button-root[data-variant='outline'] {
+  @apply hover:bg-primary/40 hover:border-black hover:border-[0.5px] hover:text-white dark:hover:bg-primary/20;
 }
 
 .mantine-TextInput-input {
-  @apply text-sm h-[34px]  rounded-[6px] placeholder:text-slate-400 dark:bg-transparent dark:text-white;
+  @apply text-sm h-[34px]  rounded-[6px]  dark:bg-transparent dark:text-white;
 }
 
 .mantine-Select-input {
-  @apply text-sm h-[34px]  rounded-[6px] placeholder:text-slate-400 dark:bg-transparent dark:text-white;
+  @apply text-sm h-[34px]  rounded-[6px]  dark:bg-transparent dark:text-white;
 }
 .mantine-PasswordInput-input {
-  @apply text-sm h-[34px]  rounded-[6px] placeholder:!text-slate-400 dark:bg-transparent dark:text-white;
+  @apply text-sm h-[34px]  rounded-[6px]  dark:bg-transparent dark:text-white;
 }
 
 .mantine-PinInput-root {
@@ -78,4 +82,28 @@
 .scrollbar-hide {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+.mantine-Modal-content {
+  @apply bg-white dark:bg-black;
+}
+
+.mantine-Modal-overlay {
+  @apply bg-black/50 dark:bg-white/50;
+}
+
+.mantine-Menu-dropdown {
+  @apply border-app-border rounded-lg;
+}
+
+.mantine-Menu-item {
+  @apply hover:bg-primary/10 self-stretch  text-47gray p-2 dark:text-white text-xs font-medium font-['Geist'];
+}
+
+.mantine-Switch-thumb {
+  @apply bg-white;
+
+  &::before {
+    @apply bg-white;
+  }
 }

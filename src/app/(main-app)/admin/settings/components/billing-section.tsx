@@ -1,9 +1,15 @@
+import { IconFlatCheck } from '@/public/assets/svgs/icon-check-flat'
 import { Badge, Box, Button, Flex, Modal, ScrollArea, Text } from '@mantine/core'
 import React, { useMemo } from 'react'
 import { AppTabs } from 'src/components/others/app-tabs'
 import { BillItem } from 'src/types/general'
 
-export const BillingModal = () => {
+interface PropsContent {
+  open: boolean
+  onClose: () => void
+}
+
+export const BillingModal: React.FC<PropsContent> = ({ open, onClose }) => {
   const tabList = useMemo(() => {
     return [
       { label: 'Monthly', value: 'monthly' },
@@ -65,21 +71,20 @@ export const BillingModal = () => {
       scrollAreaComponent={ScrollArea.Autosize}
       size={'1304px'}
       centered
-      opened={true}
-      onClose={() => {}}
+      opened={open}
+      p={0}
+      onClose={onClose}
     >
       <Modal.Overlay />
-      <Modal.Content radius={16} className='rounded-xl'>
-        <Modal.Header>
+      <Modal.Content p={0} radius={16} className='rounded-xl'>
+        <Modal.Body>
           <Flex className=' w-full gap-4 justify-center flex-col items-center'>
             <Text className='bill-modal-title'>Choose Your Plan</Text>
             <AppTabs disableParams value={''} customClassName='billing-tab' tabList={tabList} />
           </Flex>
-        </Modal.Header>
-        <Modal.Body className='overflow-hidden'>
           <Box className='grid items-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
-            {billList?.map((item) => {
-              return <BillCard bill={item} />
+            {billList?.map((item, index) => {
+              return <BillCard key={index} bill={item} />
             })}
           </Box>
         </Modal.Body>
@@ -94,7 +99,7 @@ interface Props {
 
 const BillCard: React.FC<Props> = ({ bill }) => {
   return (
-    <Box className='p-4 xl:p-8 bg-white inline-flex flex-col justify-start items-start app-border gap-8'>
+    <Box className=' app-border bill-card'>
       <Flex className='border-b-[0.50px] border-stone-300/50 w-full justify-between gap-2  items-center overflow-hidden flex-wrap pb-2'>
         <Box className='flex justify-start items-center gap-1'>
           <Text className='bill-card-price'>${bill?.price}</Text>
@@ -111,16 +116,20 @@ const BillCard: React.FC<Props> = ({ bill }) => {
           <Box className=' flex flex-col justify-start items-start gap-2'>
             {bill.sectionList.map((label) => {
               return (
-                <Box className='size- inline-flex justify-start items-center gap-2 overflow-hidden'>
-                  <Box className='size-5 bg-sky-500/5' />
-                  <Box className='w-2 h-1.5 bg-Primary-2' />
+                <Box
+                  key={label}
+                  className=' inline-flex justify-start items-center gap-2 overflow-hidden'
+                >
+                  <Box className='size-5 rounded-full bg-sky-500/5'>
+                    <IconFlatCheck />
+                  </Box>
                   <Box className='bill-card-des'>{label}</Box>
                 </Box>
               )
             })}
           </Box>
         </Box>
-        <Button className='bill-btn  w-full mt-[5rem]' variant='light'>
+        <Button className='bill-btn  !w-full mt-[5rem]' variant='light'>
           Upgrade to Pro
         </Button>
       </Box>

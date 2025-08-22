@@ -33,25 +33,13 @@ export const theme = createTheme({
     ],
   },
 
-  // fontSizes: fontSize,
   primaryColor: 'brand',
 
   components: {
-    Button: {
-      classNames: {
-        root: 'mantine-btn',
-      },
-    },
     ScrollArea: {
       classNames: {
         scrollbar: 'scrollbar',
         corner: 'corner',
-      },
-    },
-    TextInput: {
-      classNames: {
-        root: 'mantine-input',
-        input: 'mantine-TextInput-input',
       },
     },
   },
