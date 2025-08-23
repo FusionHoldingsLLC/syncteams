@@ -1,12 +1,12 @@
 import { Metadata } from 'next'
-import AuthClient from './components/auth-client'
+import LoginClient from './components/login-client'
 
 export const metadata: Metadata = {
   title: 'SyncTeams | Sign In',
 }
 
-const AuthPage = () => {
-  return <AuthClient />
+const LoginPage = () => {
+  return <LoginClient />
 }
 
-export default AuthPage
+export default LoginPage

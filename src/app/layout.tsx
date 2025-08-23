@@ -42,7 +42,11 @@ export default function RootLayout({
         <ColorSchemeScript defaultColorScheme='light' />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased `}>
-        <Providers>{children}</Providers>
+        <Providers>
+          {/* <RouteGuard> */}
+          {children}
+          {/* </RouteGuard> */}
+        </Providers>
         <Toaster position='top-center' />
       </body>
     </html>

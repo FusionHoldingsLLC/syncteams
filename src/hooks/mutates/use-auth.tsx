@@ -6,12 +6,16 @@ import {
   useCreateUserMutation,
   useLoginMutation,
   useResendVerificationEmailMutation,
+  useResetPasswordMutation,
+  useResetPasswordRequestMutation,
+  useResetPasswordVerificationMutation,
   useUpdateUserMutation,
   useVerifyEmailMutation,
   VerifyEmailMutation,
 } from '@/graphql/generated'
 import { toast } from 'src/components/others/toast'
 import { routes } from 'src/lib/routes'
+import { userAuthStore } from 'src/store/user.store'
 import { useError } from '../logic/use-error'
 import { useNavigation } from '../logic/use-navigation'
 
@@ -19,7 +23,7 @@ export const useLoginMutateHook = () => {
   const { handleError } = useError()
   const { navigate } = useNavigation()
 
-  const [login, { loading, error }] = useLoginMutation({
+  const [login, { loading, data: loginData, error }] = useLoginMutation({
     onError(error) {
       handleError(error)
     },
@@ -29,19 +33,12 @@ export const useLoginMutateHook = () => {
     onError(error) {
       handleError(error)
     },
-    onCompleted(data) {
-      if (!data?.checkUser) {
-        navigate(routes.auth.signUp)
-        toast({
-          message: 'User does not exit!',
-          variant: 'info',
-        })
-      }
-    },
   })
 
   return {
-    onLoin: login,
+    onLogin: login,
+    loginData,
+    isUserExists: Boolean(checkUserData?.checkUser),
     onCheckUser: checkUser,
     loading: loading || isCheckingUser,
     error,
@@ -120,31 +117,49 @@ export const useUpdateUserMutateHook = ({
   updateUserInput: UpdateUserInput
 }) => {
   const { handleError } = useError()
-
   const { navigate } = useNavigation()
+
+  const { setLoggedIn } = userAuthStore()
 
   const [updateUser, { loading }] = useUpdateUserMutation({
     onError(error) {
       handleError(error)
     },
-    onCompleted() {
-      navigate(routes.app.onBoarding)
-      toast({
-        message: 'Profile updated successfully!',
-        variant: 'success',
-      })
-    },
   })
 
   const [login, { loading: isLoggingIn }] = useLoginMutation({
-    onCompleted(data) {
-      localStorage.setItem('token', data.login.accessToken)
-      updateUser({
-        variables: {
-          input: updateUserInput,
-        },
-      })
+    async onCompleted(loginData) {
+      try {
+        const token = loginData.login.accessToken
+
+        if (!token) {
+          throw new Error('No token received from login response')
+        }
+
+        // Store token before making further requests
+        localStorage.setItem('token', token)
+
+        await updateUser({
+          variables: { input: updateUserInput },
+          context: {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          },
+        })
+
+        // Post-update actions
+        navigate(routes.app.onBoarding.path)
+        setLoggedIn(true)
+        toast({
+          message: 'Profile updated successfully!',
+          variant: 'success',
+        })
+      } catch (err) {
+        console.error('Error during login or update:', err)
+      }
     },
+
     onError(error) {
       handleError(error)
     },
@@ -162,5 +177,108 @@ export const useUpdateUserMutateHook = ({
     loading: isLoggingIn || loading,
     updateUser,
     handleUpdate,
+  }
+}
+
+export const useRequestPasswordMutateHook = ({ onSuccess }: { onSuccess: () => void }) => {
+  const { handleError } = useError()
+
+  const [resetPassword, { loading }] = useResetPasswordRequestMutation({
+    onError(error) {
+      handleError(error)
+    },
+    onCompleted() {
+      onSuccess?.()
+      toast({
+        message: 'OTP code has been resent successfully!',
+        variant: 'success',
+      })
+    },
+  })
+
+  const [checkUser, { loading: isCheckingUser }] = useCheckUserMutation({
+    onError(error) {
+      handleError(error)
+    },
+  })
+
+  const handleResetPassword = (email: string) => {
+    checkUser({
+      variables: {
+        input: {
+          email,
+        },
+      },
+      onCompleted(data) {
+        if (!data?.checkUser) {
+          toast({
+            message: 'User does not exit!',
+            variant: 'info',
+          })
+          return
+        }
+        resetPassword({
+          variables: {
+            input: {
+              email,
+            },
+          },
+        })
+      },
+    })
+  }
+
+  return {
+    loading: isCheckingUser || loading,
+    resetPassword: handleResetPassword,
+  }
+}
+
+export const useResetPasswordVerificationMutateHook = ({
+  onSuccess,
+}: {
+  onSuccess: () => void
+}) => {
+  const { handleError } = useError()
+
+  const [verifyOtp, { loading }] = useResetPasswordVerificationMutation({
+    onError(error) {
+      handleError(error)
+    },
+    onCompleted(data) {
+      onSuccess?.()
+      toast({
+        message: 'Otp verified successfully!',
+        variant: 'success',
+      })
+    },
+  })
+
+  return {
+    loading,
+    verifyOtp,
+  }
+}
+
+export const useResetPasswordMutateHook = () => {
+  const { handleError } = useError()
+  const { navigate } = useNavigation()
+
+  const [resetPassword, { loading }] = useResetPasswordMutation({
+    onError(error) {
+      handleError(error)
+    },
+    onCompleted(data) {
+      navigate(`${routes.auth.login}?email=${data.resetPassword.email}`)
+      toast({
+        message: 'Password reset successfully!',
+        variant: 'success',
+      })
+    },
+  })
+
+  return {
+    loading,
+    resetPassword,
   }
 }

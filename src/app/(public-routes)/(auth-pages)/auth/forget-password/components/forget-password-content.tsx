@@ -7,38 +7,31 @@ import { AuthHeader } from 'src/components/others/auth-header'
 import { useNavigation } from 'src/hooks/logic/use-navigation'
 import { routes } from 'src/lib/routes'
 import { initialValues, validationSchemas } from 'src/validators/auth'
+import { ForgetPasswordForm } from './forget-password-form'
 import OtpContent from './otp-content'
-import ProfileContent from './profile-content'
-import { SingUpForm } from './signup-form'
+import { ResetPasswordForm } from './reset-password-form'
 
-const AuthContent = () => {
+const ForgetPasswordContent = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const { navigate } = useNavigation()
   const form = useForm({
-    initialValues: initialValues.signUp,
-    validate: yupResolver(validationSchemas.signUp),
+    initialValues: initialValues.requestResetPassword,
+    validate: yupResolver(validationSchemas.requestResetPassword),
   })
 
   const contentList = useCallback(() => {
     return [
       {
-        title: 'Let’s create your Account.',
-        component: <SingUpForm formik={form} onSuccess={() => setCurrentIndex(1)} />,
+        title: 'Reset Password',
+        component: <ForgetPasswordForm formik={form} onSuccess={() => setCurrentIndex(1)} />,
       },
       {
         title: 'Email Verification',
         component: <OtpContent email={form.values.email} onSuccess={() => setCurrentIndex(2)} />,
       },
       {
-        title: 'Complete your Profile',
-        component: (
-          <ProfileContent
-            loginDetail={{
-              email: form.values.email,
-              password: form.values.password,
-            }}
-          />
-        ),
+        title: 'Create a new password.',
+        component: <ResetPasswordForm email={form.values.email} />,
       },
     ]
   }, [form])
@@ -54,10 +47,11 @@ const AuthContent = () => {
   }
   return (
     <>
+      {/* <SwitchTheme /> */}
       <AuthHeader onBackClick={handleBack} title={currentComponent?.title} />
       {currentComponent?.component}
     </>
   )
 }
 
-export default AuthContent
+export default ForgetPasswordContent

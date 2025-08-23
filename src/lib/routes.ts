@@ -9,12 +9,41 @@ export const routes = {
     devReg: '/auth/dev-register',
   },
   app: {
-    onBoarding: '/on-boarding',
+    onBoarding: {
+      path: '/onboarding',
+      meta: {
+        requiresAuth: true,
+      },
+    },
     admin: {
-      dashboard: '/admin/dashboard',
-      users: '/admin/users',
-      userDetails: (slug: string) => `/admin/users/${slug}`,
-      settings: '/admin/settings',
+      dashboard: {
+        path: '/admin/dashboard',
+        meta: {
+          requiresAuth: true,
+          role: 'admin',
+        },
+      },
+      users: {
+        path: '/admin/users',
+        meta: {
+          requiresAuth: true,
+          role: 'admin',
+        },
+      },
+      userDetails: (slug: string) => ({
+        path: `/admin/users/${slug}`,
+        meta: {
+          requiresAuth: true,
+          role: 'admin',
+        },
+      }),
+      settings: {
+        path: '/admin/settings',
+        meta: {
+          requiresAuth: true,
+          role: 'admin',
+        },
+      },
     },
   },
 } as const

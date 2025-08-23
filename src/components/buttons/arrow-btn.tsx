@@ -11,7 +11,7 @@ interface Props {
 export const ArrowBtn: React.FC<Props> = ({ title, className, onClick }) => {
   return (
     <Button
-      rightSection={<IconArrowRight />}
+      rightSection={<IconArrowRight className='stroke-primary' />}
       variant='subtle'
       onClick={onClick}
       className={`arrow-btn  !px-1 !py-0 flex items-center !gap-[1px] ${className}`}

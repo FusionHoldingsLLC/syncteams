@@ -246,6 +246,7 @@
   font-family: 'Geist', sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+  ---secondary-bg: #f2fafd;
 }
 
 @theme inline {
@@ -276,6 +277,7 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    ---secondary-bg: #0c1519;
   }
 }
 
@@ -307,11 +309,12 @@ body {
 }
 
 .survey-card-item {
-  @apply border-[0.5px] transition-all duration-300 rounded-[16px]  border-[#D1D1D1] p-[16px];
+  @apply border-[0.5px] hover:bg-[#F2FAFD] dark:hover:bg-[#0C1519]    transition-all duration-300 rounded-[16px]  border-[#D1D1D1] p-4;
 }
 .survey-card-item[data-active='true'] {
-  @apply border-[0.5px] rounded-[16px]  !border-primary p-[16px] bg-primary/5;
+  @apply border-[0.5px] rounded-[16px]  !border-primary p-[16px] bg-primary/10;
 }
+
 .survey-card-text {
   @apply text-[16px] font-semibold text-center;
 }
@@ -595,4 +598,15 @@ body {
 }
 .otp-e-resend-btn[data-disabled='true'] {
   @apply opacity-50 cursor-not-allowed bg-transparent;
+}
+
+.text-survey-question {
+  @apply text-center dark:text-white/70 text-47gray text-sm font-bold font-['Geist'];
+}
+
+.survey-indicator {
+  @apply self-stretch w-[15px] h-1 relative bg-newstroke rounded-[32px];
+}
+.survey-indicator[data-active='true'] {
+  @apply bg-primary;
 }

@@ -38,7 +38,7 @@ const UsersDetailsContent = () => {
   return (
     <Box className='page-layout-wrapper'>
       <DashboardHeader
-        prevRoute={routes.app.admin.users}
+        prevRoute={routes.app.admin.users.path}
         title='Users'
         description='View and manage all users'
       />

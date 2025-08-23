@@ -1,7 +1,5 @@
 import { Button, TextInput, Transition } from '@mantine/core'
-
 import { useForm } from '@mantine/form'
-
 import { yupResolver } from 'mantine-form-yup-resolver'
 import { useEffect, useState } from 'react'
 import { LoginInput } from 'src/graphql/generated'

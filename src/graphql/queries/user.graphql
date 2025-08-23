@@ -1,0 +1,37 @@
+query GetCurrentUser {
+  getCurrentUser {
+    avatar
+    email
+    lastName
+    preferences {
+      activeWorkflowIds {
+        active
+        no
+        workflowId
+      }
+      data
+      fontSize
+      language
+      sideBarMode
+      theme
+    }
+    firstName
+    onboarding {
+      answer
+      id
+      question
+    }
+    subscription {
+      cancelAtPeriodEnd
+      endDate
+      nextBillingDate
+      planType
+      startDate
+      status
+      trialEndDate
+      trialStartDate
+    }
+    subscriptionType
+    username
+  }
+}

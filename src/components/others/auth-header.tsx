@@ -7,12 +7,18 @@ interface Props {
   title: string
   onBackClick?: () => void
   hideBackBtn?: boolean
+  wrapperClassName?: string
 }
 
-export const AuthHeader: React.FC<Props> = ({ title, hideBackBtn, onBackClick }) => {
+export const AuthHeader: React.FC<Props> = ({
+  title,
+  hideBackBtn,
+  wrapperClassName,
+  onBackClick,
+}) => {
   const { isDarkMode } = useUiStore()
   return (
-    <Flex className='gap-2 justify-between items-center mb-8 '>
+    <Flex className={`gap-2 justify-between items-center mb-8 ${wrapperClassName}`}>
       {!hideBackBtn ? (
         <ActionIcon onClick={() => onBackClick?.()} className='auth-back-btn'>
           <IconArrowLeft

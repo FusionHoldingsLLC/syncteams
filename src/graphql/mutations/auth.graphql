@@ -62,3 +62,29 @@ mutation UpdateUser($input: UpdateUserInput!) {
     username
   }
 }
+
+mutation ResetPasswordRequest($input: ResetPasswordRequestInput!) {
+  resetPasswordRequest(input: $input) {
+    email
+  }
+}
+
+mutation ResetPasswordVerification($input: ResetPasswordVerificationInput!) {
+  resetPasswordVerification(input: $input) {
+    email
+  }
+}
+mutation ResetPassword($input: ResetPasswordInput!) {
+  resetPassword(input: $input) {
+    email
+  }
+}
+
+mutation UpdateOnboarding($input: updateOnboardingInput!) {
+  updateOnboarding(input: $input) {
+    answer
+    count
+    id
+    question
+  }
+}

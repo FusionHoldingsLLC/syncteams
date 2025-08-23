@@ -13,17 +13,17 @@ const navLinks: NavItem[] = [
   {
     label: 'Dashboard',
     icon: (isActive) => <IconDashboard data-active={isActive} className=' side-nav-links-icon ' />,
-    route: routes.app.admin.dashboard,
+    route: routes.app.admin.dashboard.path,
   },
   {
     label: 'Users',
     icon: (isActive) => <IconUsers data-active={isActive} className=' side-nav-links-icon ' />,
-    route: routes.app.admin.users,
+    route: routes.app.admin.users.path,
   },
   {
     label: 'Setting',
     icon: (isActive) => <IconSettings data-active={isActive} className=' side-nav-links-icon ' />,
-    route: routes.app.admin.settings,
+    route: routes.app.admin.settings.path,
   },
 ]
 

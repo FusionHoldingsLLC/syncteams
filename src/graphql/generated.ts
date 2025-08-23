@@ -667,7 +667,8 @@ export enum LogType {
   Chat = 'CHAT',
   Edge = 'EDGE',
   Test = 'TEST',
-  Training = 'TRAINING'
+  Training = 'TRAINING',
+  Trigger = 'TRIGGER'
 }
 
 export type LoginInput = {
@@ -678,6 +679,7 @@ export type LoginInput = {
 export type LoginType = {
   __typename?: 'LoginType';
   accessToken: Scalars['String']['output'];
+  isAdmin: Scalars['Boolean']['output'];
   isVerified: Scalars['Boolean']['output'];
   profileCompleted: Scalars['Boolean']['output'];
   refreshToken: Scalars['String']['output'];
@@ -794,12 +796,14 @@ export type Mutation = {
   addAgentTool: WorkflowNodeType;
   /** Adds a new component to a node for the authenticated user */
   addNodeComponent: WorkflowNodeType;
+  adminAutoSignIn: AdminLoginType;
   /** Create a new marketplace category (admin only) */
   adminCreateCategory: AdminMarketplaceCategoryType;
   adminCreateSupportReply: AdminSupportReplyType;
   /** Delete marketplace category (admin only) */
   adminDeleteCategory: Scalars['Boolean']['output'];
   adminDeleteUser: Scalars['Boolean']['output'];
+  adminGoogleAutoSignIn: AdminLoginType;
   adminGoogleCallback: AdminLoginType;
   adminLogin: AdminLoginType;
   adminMarkSupportReplyRead: Scalars['Boolean']['output'];
@@ -1651,6 +1655,7 @@ export type Query = {
   adminSupports: PaginatedAdminSupportsType;
   adminUser: AdminUserType;
   adminUsers: PaginatedAdminUsersType;
+  checkAdminAccess: Scalars['Boolean']['output'];
   /** Get all marketplace categories */
   getAllCategories: Array<MarketplaceCategoryType>;
   /** Fetches all the API keys information of the authenticated user */
@@ -1711,7 +1716,7 @@ export type Query = {
   hello: Scalars['String']['output'];
   /** Search templates by query string */
   searchTemplates: PaginatedMarketplaceTemplatesType;
-  workflowChatEvents: WorkflowLogType;
+  workflowChatEvents: WorkflowChatEventPaginatedType;
   workflowLogs: WorkflowLogPaginatedType;
 };
 
@@ -1863,8 +1868,14 @@ export enum QueryToolType {
 }
 
 export type QueryWorkflowChatEventsInput = {
-  /** The ID of the WorkflowLog whose chat (and its childrens chat) you want */
-  workflowLogId: Scalars['ID']['input'];
+  /** Cursor (last-seen chat event ID) for pagination */
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  /** Number of chat events to return per page */
+  limit?: Scalars['Float']['input'];
+  /** Filter by external task ID */
+  taskId?: InputMaybe<Scalars['ID']['input']>;
+  /** Filter by workflow instance ID */
+  workflowId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type QueryWorkflowLogsInput = {
@@ -2332,6 +2343,16 @@ export enum WorkflowAppType {
   Internal = 'INTERNAL'
 }
 
+/** Paginated list of workflow chat events */
+export type WorkflowChatEventPaginatedType = {
+  __typename?: 'WorkflowChatEventPaginatedType';
+  /** Whether more pages exist */
+  hasMore: Scalars['Boolean']['output'];
+  items?: Maybe<Array<WorkflowChatEventType>>;
+  /** Cursor for next page */
+  nextCursor?: Maybe<Scalars['String']['output']>;
+};
+
 /** One message in the chat history for a node */
 export type WorkflowChatEventType = {
   __typename?: 'WorkflowChatEventType';
@@ -2340,6 +2361,7 @@ export type WorkflowChatEventType = {
   eventData?: Maybe<Scalars['JSON']['output']>;
   eventType: EventType;
   id: Scalars['ID']['output'];
+  updatedAt: Scalars['DateTime']['output'];
 };
 
 /** Paginated list of workflow logs */
@@ -2366,12 +2388,10 @@ export enum WorkflowLogStatus {
 /** One node-execution record in a workflow run */
 export type WorkflowLogType = {
   __typename?: 'WorkflowLogType';
-  chatLogs?: Maybe<Array<WorkflowChatEventType>>;
-  /** Any direct child logs (sub-nodes) of this execution */
-  children?: Maybe<Array<WorkflowLogType>>;
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
-  node?: Maybe<WorkflowNodeType>;
+  logType: LogType;
+  parentTaskId?: Maybe<Scalars['ID']['output']>;
   status: WorkflowLogStatus;
   taskId: Scalars['ID']['output'];
   updatedAt: Scalars['DateTime']['output'];
@@ -2465,6 +2485,44 @@ export type UpdateUserMutationVariables = Exact<{
 
 
 export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'UserType', avatar?: string | null, email: string, firstName?: string | null, lastName?: string | null, subscriptionType: SubscriptionType, username?: string | null, onboarding?: Array<{ __typename?: 'OnboardingEntryType', answer: Array<string>, id: string, question: string }> | null, preferences?: { __typename?: 'PreferenceType', data: any, fontSize?: number | null, language?: PreferenceLanguage | null, sideBarMode?: string | null, theme?: string | null } | null, subscription?: { __typename?: 'UserSubscriptionResponse', cancelAtPeriodEnd?: boolean | null, endDate?: any | null, nextBillingDate?: any | null, planType: SubscriptionType, startDate?: any | null, status?: SubscriptionStatus | null, trialEndDate?: any | null, trialStartDate?: any | null } | null } };
+
+export type ResetPasswordRequestMutationVariables = Exact<{
+  input: ResetPasswordRequestInput;
+}>;
+
+
+export type ResetPasswordRequestMutation = { __typename?: 'Mutation', resetPasswordRequest: { __typename?: 'AuthType', email: string } };
+
+export type ResetPasswordVerificationMutationVariables = Exact<{
+  input: ResetPasswordVerificationInput;
+}>;
+
+
+export type ResetPasswordVerificationMutation = { __typename?: 'Mutation', resetPasswordVerification: { __typename?: 'AuthType', email: string } };
+
+export type ResetPasswordMutationVariables = Exact<{
+  input: ResetPasswordInput;
+}>;
+
+
+export type ResetPasswordMutation = { __typename?: 'Mutation', resetPassword: { __typename?: 'AuthType', email: string } };
+
+export type UpdateOnboardingMutationVariables = Exact<{
+  input: UpdateOnboardingInput;
+}>;
+
+
+export type UpdateOnboardingMutation = { __typename?: 'Mutation', updateOnboarding: { __typename?: 'OnboardingType', answer: Array<string>, count: number, id: string, question: string } };
+
+export type GoogleAuthUrlQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GoogleAuthUrlQuery = { __typename?: 'Query', googleAuthUrl: string };
+
+export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCurrentUserQuery = { __typename?: 'Query', getCurrentUser: { __typename?: 'UserType', avatar?: string | null, email: string, lastName?: string | null, firstName?: string | null, subscriptionType: SubscriptionType, username?: string | null, preferences?: { __typename?: 'PreferenceType', data: any, fontSize?: number | null, language?: PreferenceLanguage | null, sideBarMode?: string | null, theme?: string | null, activeWorkflowIds?: Array<{ __typename?: 'ActiveWorkflowType', active: boolean, no: number, workflowId: string }> | null } | null, onboarding?: Array<{ __typename?: 'OnboardingEntryType', answer: Array<string>, id: string, question: string }> | null, subscription?: { __typename?: 'UserSubscriptionResponse', cancelAtPeriodEnd?: boolean | null, endDate?: any | null, nextBillingDate?: any | null, planType: SubscriptionType, startDate?: any | null, status?: SubscriptionStatus | null, trialEndDate?: any | null, trialStartDate?: any | null } | null } };
 
 
 export const LoginDocument = gql`
@@ -2694,3 +2752,246 @@ export function useUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<U
 export type UpdateUserMutationHookResult = ReturnType<typeof useUpdateUserMutation>;
 export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>;
 export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
+export const ResetPasswordRequestDocument = gql`
+    mutation ResetPasswordRequest($input: ResetPasswordRequestInput!) {
+  resetPasswordRequest(input: $input) {
+    email
+  }
+}
+    `;
+export type ResetPasswordRequestMutationFn = Apollo.MutationFunction<ResetPasswordRequestMutation, ResetPasswordRequestMutationVariables>;
+
+/**
+ * __useResetPasswordRequestMutation__
+ *
+ * To run a mutation, you first call `useResetPasswordRequestMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useResetPasswordRequestMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [resetPasswordRequestMutation, { data, loading, error }] = useResetPasswordRequestMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useResetPasswordRequestMutation(baseOptions?: Apollo.MutationHookOptions<ResetPasswordRequestMutation, ResetPasswordRequestMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ResetPasswordRequestMutation, ResetPasswordRequestMutationVariables>(ResetPasswordRequestDocument, options);
+      }
+export type ResetPasswordRequestMutationHookResult = ReturnType<typeof useResetPasswordRequestMutation>;
+export type ResetPasswordRequestMutationResult = Apollo.MutationResult<ResetPasswordRequestMutation>;
+export type ResetPasswordRequestMutationOptions = Apollo.BaseMutationOptions<ResetPasswordRequestMutation, ResetPasswordRequestMutationVariables>;
+export const ResetPasswordVerificationDocument = gql`
+    mutation ResetPasswordVerification($input: ResetPasswordVerificationInput!) {
+  resetPasswordVerification(input: $input) {
+    email
+  }
+}
+    `;
+export type ResetPasswordVerificationMutationFn = Apollo.MutationFunction<ResetPasswordVerificationMutation, ResetPasswordVerificationMutationVariables>;
+
+/**
+ * __useResetPasswordVerificationMutation__
+ *
+ * To run a mutation, you first call `useResetPasswordVerificationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useResetPasswordVerificationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [resetPasswordVerificationMutation, { data, loading, error }] = useResetPasswordVerificationMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useResetPasswordVerificationMutation(baseOptions?: Apollo.MutationHookOptions<ResetPasswordVerificationMutation, ResetPasswordVerificationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ResetPasswordVerificationMutation, ResetPasswordVerificationMutationVariables>(ResetPasswordVerificationDocument, options);
+      }
+export type ResetPasswordVerificationMutationHookResult = ReturnType<typeof useResetPasswordVerificationMutation>;
+export type ResetPasswordVerificationMutationResult = Apollo.MutationResult<ResetPasswordVerificationMutation>;
+export type ResetPasswordVerificationMutationOptions = Apollo.BaseMutationOptions<ResetPasswordVerificationMutation, ResetPasswordVerificationMutationVariables>;
+export const ResetPasswordDocument = gql`
+    mutation ResetPassword($input: ResetPasswordInput!) {
+  resetPassword(input: $input) {
+    email
+  }
+}
+    `;
+export type ResetPasswordMutationFn = Apollo.MutationFunction<ResetPasswordMutation, ResetPasswordMutationVariables>;
+
+/**
+ * __useResetPasswordMutation__
+ *
+ * To run a mutation, you first call `useResetPasswordMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useResetPasswordMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [resetPasswordMutation, { data, loading, error }] = useResetPasswordMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useResetPasswordMutation(baseOptions?: Apollo.MutationHookOptions<ResetPasswordMutation, ResetPasswordMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ResetPasswordMutation, ResetPasswordMutationVariables>(ResetPasswordDocument, options);
+      }
+export type ResetPasswordMutationHookResult = ReturnType<typeof useResetPasswordMutation>;
+export type ResetPasswordMutationResult = Apollo.MutationResult<ResetPasswordMutation>;
+export type ResetPasswordMutationOptions = Apollo.BaseMutationOptions<ResetPasswordMutation, ResetPasswordMutationVariables>;
+export const UpdateOnboardingDocument = gql`
+    mutation UpdateOnboarding($input: updateOnboardingInput!) {
+  updateOnboarding(input: $input) {
+    answer
+    count
+    id
+    question
+  }
+}
+    `;
+export type UpdateOnboardingMutationFn = Apollo.MutationFunction<UpdateOnboardingMutation, UpdateOnboardingMutationVariables>;
+
+/**
+ * __useUpdateOnboardingMutation__
+ *
+ * To run a mutation, you first call `useUpdateOnboardingMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateOnboardingMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateOnboardingMutation, { data, loading, error }] = useUpdateOnboardingMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateOnboardingMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOnboardingMutation, UpdateOnboardingMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateOnboardingMutation, UpdateOnboardingMutationVariables>(UpdateOnboardingDocument, options);
+      }
+export type UpdateOnboardingMutationHookResult = ReturnType<typeof useUpdateOnboardingMutation>;
+export type UpdateOnboardingMutationResult = Apollo.MutationResult<UpdateOnboardingMutation>;
+export type UpdateOnboardingMutationOptions = Apollo.BaseMutationOptions<UpdateOnboardingMutation, UpdateOnboardingMutationVariables>;
+export const GoogleAuthUrlDocument = gql`
+    query GoogleAuthUrl {
+  googleAuthUrl
+}
+    `;
+
+/**
+ * __useGoogleAuthUrlQuery__
+ *
+ * To run a query within a React component, call `useGoogleAuthUrlQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGoogleAuthUrlQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGoogleAuthUrlQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGoogleAuthUrlQuery(baseOptions?: Apollo.QueryHookOptions<GoogleAuthUrlQuery, GoogleAuthUrlQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GoogleAuthUrlQuery, GoogleAuthUrlQueryVariables>(GoogleAuthUrlDocument, options);
+      }
+export function useGoogleAuthUrlLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GoogleAuthUrlQuery, GoogleAuthUrlQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GoogleAuthUrlQuery, GoogleAuthUrlQueryVariables>(GoogleAuthUrlDocument, options);
+        }
+export function useGoogleAuthUrlSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GoogleAuthUrlQuery, GoogleAuthUrlQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GoogleAuthUrlQuery, GoogleAuthUrlQueryVariables>(GoogleAuthUrlDocument, options);
+        }
+export type GoogleAuthUrlQueryHookResult = ReturnType<typeof useGoogleAuthUrlQuery>;
+export type GoogleAuthUrlLazyQueryHookResult = ReturnType<typeof useGoogleAuthUrlLazyQuery>;
+export type GoogleAuthUrlSuspenseQueryHookResult = ReturnType<typeof useGoogleAuthUrlSuspenseQuery>;
+export type GoogleAuthUrlQueryResult = Apollo.QueryResult<GoogleAuthUrlQuery, GoogleAuthUrlQueryVariables>;
+export const GetCurrentUserDocument = gql`
+    query GetCurrentUser {
+  getCurrentUser {
+    avatar
+    email
+    lastName
+    preferences {
+      activeWorkflowIds {
+        active
+        no
+        workflowId
+      }
+      data
+      fontSize
+      language
+      sideBarMode
+      theme
+    }
+    firstName
+    onboarding {
+      answer
+      id
+      question
+    }
+    subscription {
+      cancelAtPeriodEnd
+      endDate
+      nextBillingDate
+      planType
+      startDate
+      status
+      trialEndDate
+      trialStartDate
+    }
+    subscriptionType
+    username
+  }
+}
+    `;
+
+/**
+ * __useGetCurrentUserQuery__
+ *
+ * To run a query within a React component, call `useGetCurrentUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCurrentUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCurrentUserQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetCurrentUserQuery(baseOptions?: Apollo.QueryHookOptions<GetCurrentUserQuery, GetCurrentUserQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetCurrentUserQuery, GetCurrentUserQueryVariables>(GetCurrentUserDocument, options);
+      }
+export function useGetCurrentUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCurrentUserQuery, GetCurrentUserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetCurrentUserQuery, GetCurrentUserQueryVariables>(GetCurrentUserDocument, options);
+        }
+export function useGetCurrentUserSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetCurrentUserQuery, GetCurrentUserQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetCurrentUserQuery, GetCurrentUserQueryVariables>(GetCurrentUserDocument, options);
+        }
+export type GetCurrentUserQueryHookResult = ReturnType<typeof useGetCurrentUserQuery>;
+export type GetCurrentUserLazyQueryHookResult = ReturnType<typeof useGetCurrentUserLazyQuery>;
+export type GetCurrentUserSuspenseQueryHookResult = ReturnType<typeof useGetCurrentUserSuspenseQuery>;
+export type GetCurrentUserQueryResult = Apollo.QueryResult<GetCurrentUserQuery, GetCurrentUserQueryVariables>;

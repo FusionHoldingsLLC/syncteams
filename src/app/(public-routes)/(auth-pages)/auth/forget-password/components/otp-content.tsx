@@ -1,8 +1,6 @@
 import OtpForm from 'src/components/others/otp-form'
-import {
-  useResendVerificationEmailMutateHook,
-  useVerifyEmailMutateHook,
-} from 'src/hooks/mutates/use-auth'
+import { useResetPasswordRequestMutation } from 'src/graphql/generated'
+import { useResetPasswordVerificationMutateHook } from 'src/hooks/mutates/use-auth'
 
 type Props = {
   onSuccess: () => void
@@ -10,11 +8,11 @@ type Props = {
 }
 
 const OtpContent = ({ onSuccess, email }: Props) => {
-  const { verifyEmail, loading } = useVerifyEmailMutateHook({ onSuccess })
-  const { resendEmail, loading: isResending } = useResendVerificationEmailMutateHook()
+  const { verifyOtp, loading } = useResetPasswordVerificationMutateHook({ onSuccess })
+  const [resetPassword, { loading: isResending }] = useResetPasswordRequestMutation()
 
   const handleSubmit = (otp: string) => {
-    verifyEmail({
+    verifyOtp({
       variables: {
         input: {
           email,
@@ -25,7 +23,7 @@ const OtpContent = ({ onSuccess, email }: Props) => {
   }
 
   const handleResend = () => {
-    resendEmail({
+    resetPassword({
       variables: {
         input: {
           email,

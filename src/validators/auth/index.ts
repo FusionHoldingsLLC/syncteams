@@ -49,15 +49,25 @@ export const initialValues = {
     email: '',
     password: '',
   },
+  checkUser: {
+    email: '',
+  },
 
   signUp: {
     email: '',
     password: '',
     confirmPassword: '',
   },
+  resetPassword: {
+    password: '',
+    confirmPassword: '',
+  },
 
   verifyEmail: {
     otp: '',
+  },
+  requestResetPassword: {
+    email: '',
   },
   profileForm: {
     username: '',
@@ -68,13 +78,33 @@ export const initialValues = {
 
 // Validation schemas
 export const validationSchemas = {
-  login: yup.object().shape({
+  login: (isEmailExist: boolean) =>
+    yup.object({
+      email: yup.string().email(MESSAGES.email.invalid).required(MESSAGES.email.required),
+
+      password: isEmailExist
+        ? yup
+            .string()
+            .min(8, 'Password must be at least 8 characters')
+            .required('Password is required')
+        : yup.string().notRequired(),
+    }),
+  checkUser: yup.object().shape({
     email: yup.string().email(MESSAGES.email.invalid).required(MESSAGES.email.required),
-    password: passwordSchema,
+  }),
+  requestResetPassword: yup.object().shape({
+    email: yup.string().email(MESSAGES.email.invalid).required(MESSAGES.email.required),
   }),
 
   signUp: yup.object().shape({
     email: yup.string().email(MESSAGES.email.invalid).required(MESSAGES.email.required),
+    password: passwordSchema,
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref('password'), undefined], 'Passwords must match')
+      .required('Please confirm your password'),
+  }),
+  resetPassword: yup.object().shape({
     password: passwordSchema,
     confirmPassword: yup
       .string()

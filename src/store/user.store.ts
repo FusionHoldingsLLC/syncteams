@@ -8,6 +8,7 @@ interface AuthStoreProps {
   user: UserDetails | null
   setUser: (user: UserDetails) => void
   logOut: () => void
+  setLoggedIn: (loggedIn: boolean) => void
 }
 export const userAuthStore = create<AuthStoreProps>()(
   devtools(
@@ -15,6 +16,7 @@ export const userAuthStore = create<AuthStoreProps>()(
       (set) => ({
         loggedIn: false,
         user: null,
+        setLoggedIn: (loggedIn: boolean) => set({ loggedIn }),
         setUser: (user: UserDetails) => set({ user: user, loggedIn: true }),
         logOut: () => {
           queryClient.invalidateQueries()

@@ -31,8 +31,8 @@ export interface ErrorRes {
 }
 
 export interface SectionItem {
-  value: string
-  label: string
+  value?: string
+  label?: string
   component?: JSX.Element
   icon?: JSX.Element
 }
