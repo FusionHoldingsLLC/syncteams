@@ -9,6 +9,7 @@ export const routes = {
     devReg: '/auth/dev-register',
   },
   app: {
+    onBoarding: '/on-boarding',
     admin: {
       dashboard: '/admin/dashboard',
       users: '/admin/users',

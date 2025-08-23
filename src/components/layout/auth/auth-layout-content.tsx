@@ -16,7 +16,7 @@ const AuthLayoutContent = ({ children }: PropsWithChildren<Props>) => {
       : '/assets/images/onboarding-left.svg'
   }, [isDarkMode])
   return (
-    <Box className='grid h-screen w-full lg:grid-cols-2 overflow-hidden'>
+    <Box className='grid h-screen w-full lg:grid-cols-2 gap-2 overflow-hidden'>
       {/* Left Side Graphic */}
       <Center className='py-4  auth-left-section'>
         <Image src={getImage} className='w-full h-screen' />
@@ -24,7 +24,7 @@ const AuthLayoutContent = ({ children }: PropsWithChildren<Props>) => {
 
       {/* Right Side Content */}
       <ScrollArea scrollbars='y' scrollbarSize={6} className='flex flex-col overflow-y-auto '>
-        <Box className='flex flex-col min-h-screen'>
+        <Box className='flex flex-col px-4 lg:px-0 min-h-screen'>
           {/* Header */}
           <Box className='sticky py-4 flex justify-between top-0 z-10 w-full background '>
             <CompanyLogo className='w-[120px]' />
@@ -32,14 +32,14 @@ const AuthLayoutContent = ({ children }: PropsWithChildren<Props>) => {
 
           {/* Main Content */}
 
-          <Center className='flex-1 px-0'>
-            <Container size={464} className='flex-1'>
+          <Center className='flex-1  '>
+            <Container size={464} className='flex-1 px-4 '>
               {children}
             </Container>
           </Center>
 
           {/* Footer */}
-          <Flex className='items-center justify-between py-4'>
+          <Flex className='items-center px-4  justify-between py-4'>
             <Text className='auth-footer-text'>© 2025 SyncTeams</Text>
             <Anchor href='/privacy-policy' className='auth-footer-text'>
               Privacy Policy

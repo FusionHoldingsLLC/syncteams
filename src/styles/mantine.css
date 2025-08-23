@@ -13,10 +13,7 @@
 }
 
 .mantine-PinInput-input {
-  @apply w-[50px] h-[50px] dark:bg-transparent dark:text-white rounded-[8px] dark:border-[#3A3A3A];
-}
-.mantine-PinInput-root {
-  @apply h-[70px];
+  @apply dark:bg-transparent dark:text-white rounded-[8px] dark:border-[#3A3A3A];
 }
 
 .mantine-TextInput-input {

@@ -2459,6 +2459,13 @@ export type VerifyEmailMutationVariables = Exact<{
 
 export type VerifyEmailMutation = { __typename?: 'Mutation', verifyEmail: { __typename?: 'AuthType', email: string } };
 
+export type UpdateUserMutationVariables = Exact<{
+  input: UpdateUserInput;
+}>;
+
+
+export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'UserType', avatar?: string | null, email: string, firstName?: string | null, lastName?: string | null, subscriptionType: SubscriptionType, username?: string | null, onboarding?: Array<{ __typename?: 'OnboardingEntryType', answer: Array<string>, id: string, question: string }> | null, preferences?: { __typename?: 'PreferenceType', data: any, fontSize?: number | null, language?: PreferenceLanguage | null, sideBarMode?: string | null, theme?: string | null } | null, subscription?: { __typename?: 'UserSubscriptionResponse', cancelAtPeriodEnd?: boolean | null, endDate?: any | null, nextBillingDate?: any | null, planType: SubscriptionType, startDate?: any | null, status?: SubscriptionStatus | null, trialEndDate?: any | null, trialStartDate?: any | null } | null } };
+
 
 export const LoginDocument = gql`
     mutation Login($input: LoginInput!) {
@@ -2627,3 +2634,63 @@ export function useVerifyEmailMutation(baseOptions?: Apollo.MutationHookOptions<
 export type VerifyEmailMutationHookResult = ReturnType<typeof useVerifyEmailMutation>;
 export type VerifyEmailMutationResult = Apollo.MutationResult<VerifyEmailMutation>;
 export type VerifyEmailMutationOptions = Apollo.BaseMutationOptions<VerifyEmailMutation, VerifyEmailMutationVariables>;
+export const UpdateUserDocument = gql`
+    mutation UpdateUser($input: UpdateUserInput!) {
+  updateUser(input: $input) {
+    avatar
+    email
+    firstName
+    lastName
+    onboarding {
+      answer
+      id
+      question
+    }
+    preferences {
+      data
+      fontSize
+      language
+      sideBarMode
+      theme
+    }
+    subscription {
+      cancelAtPeriodEnd
+      endDate
+      nextBillingDate
+      planType
+      startDate
+      status
+      trialEndDate
+      trialStartDate
+    }
+    subscriptionType
+    username
+  }
+}
+    `;
+export type UpdateUserMutationFn = Apollo.MutationFunction<UpdateUserMutation, UpdateUserMutationVariables>;
+
+/**
+ * __useUpdateUserMutation__
+ *
+ * To run a mutation, you first call `useUpdateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateUserMutation, { data, loading, error }] = useUpdateUserMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUserMutation, UpdateUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument, options);
+      }
+export type UpdateUserMutationHookResult = ReturnType<typeof useUpdateUserMutation>;
+export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>;
+export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;

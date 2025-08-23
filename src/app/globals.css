@@ -302,10 +302,6 @@ body {
   @apply text-[20px] font-bonn font-bold dark:text-white text-black;
 }
 
-.sm-text {
-  @apply text-sm;
-}
-
 .auth-back-btn {
   @apply rounded-md dark:rounded-full dark:bg-primary w-[20px] h-[20px] border-[#D1D1D180] border-solid bg-[#F5F5F5];
 }
@@ -586,4 +582,17 @@ body {
 
 .auth-left-section {
   @apply hidden lg:block;
+}
+
+.otp-e-text {
+  @apply text-slate-500 dark:text-white/50 text-center text-sm font-medium font-geist;
+}
+.otp-e-resend[data-active='true'] {
+  @apply text-primary;
+}
+.otp-e-resend {
+  @apply justify-start transition-all text-slate-500 text-sm font-normal font-geist;
+}
+.otp-e-resend-btn[data-disabled='true'] {
+  @apply opacity-50 cursor-not-allowed bg-transparent;
 }

@@ -1,9 +1,12 @@
 import {
   CreateUserMutation,
+  LoginInput,
+  UpdateUserInput,
   useCheckUserMutation,
   useCreateUserMutation,
   useLoginMutation,
   useResendVerificationEmailMutation,
+  useUpdateUserMutation,
   useVerifyEmailMutation,
   VerifyEmailMutation,
 } from '@/graphql/generated'
@@ -37,7 +40,6 @@ export const useLoginMutateHook = () => {
     },
   })
 
-  console.log(checkUserData)
   return {
     onLoin: login,
     onCheckUser: checkUser,
@@ -73,7 +75,12 @@ export const useResendVerificationEmailMutateHook = () => {
     onError(error) {
       handleError(error)
     },
-    onCompleted(data) {},
+    onCompleted() {
+      toast({
+        message: 'OTP code has been resent successfully!',
+        variant: 'success',
+      })
+    },
   })
 
   return {
@@ -94,11 +101,66 @@ export const useVerifyEmailMutateHook = ({
     },
     onCompleted(data) {
       onSuccess(data)
+      toast({
+        message: 'Email verified successfully!',
+        variant: 'success',
+      })
     },
   })
 
   return {
     loading,
     verifyEmail,
+  }
+}
+
+export const useUpdateUserMutateHook = ({
+  updateUserInput,
+}: {
+  updateUserInput: UpdateUserInput
+}) => {
+  const { handleError } = useError()
+
+  const { navigate } = useNavigation()
+
+  const [updateUser, { loading }] = useUpdateUserMutation({
+    onError(error) {
+      handleError(error)
+    },
+    onCompleted() {
+      navigate(routes.app.onBoarding)
+      toast({
+        message: 'Profile updated successfully!',
+        variant: 'success',
+      })
+    },
+  })
+
+  const [login, { loading: isLoggingIn }] = useLoginMutation({
+    onCompleted(data) {
+      localStorage.setItem('token', data.login.accessToken)
+      updateUser({
+        variables: {
+          input: updateUserInput,
+        },
+      })
+    },
+    onError(error) {
+      handleError(error)
+    },
+  })
+
+  const handleUpdate = ({ loginDetail }: { loginDetail: LoginInput }) => {
+    login({
+      variables: {
+        input: loginDetail,
+      },
+    })
+  }
+
+  return {
+    loading: isLoggingIn || loading,
+    updateUser,
+    handleUpdate,
   }
 }

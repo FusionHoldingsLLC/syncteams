@@ -29,3 +29,36 @@ mutation VerifyEmail($input: VerifyEmailInput!) {
     email
   }
 }
+
+mutation UpdateUser($input: UpdateUserInput!) {
+  updateUser(input: $input) {
+    avatar
+    email
+    firstName
+    lastName
+    onboarding {
+      answer
+      id
+      question
+    }
+    preferences {
+      data
+      fontSize
+      language
+      sideBarMode
+      theme
+    }
+    subscription {
+      cancelAtPeriodEnd
+      endDate
+      nextBillingDate
+      planType
+      startDate
+      status
+      trialEndDate
+      trialStartDate
+    }
+    subscriptionType
+    username
+  }
+}

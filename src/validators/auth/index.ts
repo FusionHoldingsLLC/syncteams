@@ -60,7 +60,7 @@ export const initialValues = {
     otp: '',
   },
   profileForm: {
-    userName: '',
+    username: '',
     firstName: '',
     lastName: '',
   },
@@ -86,7 +86,7 @@ export const validationSchemas = {
     otp: yup.string().required(MESSAGES.name.required).min(4, MESSAGES.name.minLength(4)),
   }),
   profileForm: yup.object().shape({
-    userName: yup.string().required(MESSAGES.name.required).min(2, MESSAGES.name.minLength(2)),
+    username: yup.string().required(MESSAGES.name.required).min(2, MESSAGES.name.minLength(2)),
     firstName: yup.string().required(MESSAGES.name.required).min(2, MESSAGES.name.minLength(2)),
     lastName: yup.string().required(MESSAGES.name.required).min(2, MESSAGES.name.minLength(2)),
   }),

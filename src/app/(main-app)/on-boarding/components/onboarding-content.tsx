@@ -4,15 +4,13 @@ import { useForm } from '@mantine/form'
 import { yupResolver } from 'mantine-form-yup-resolver'
 import { useCallback, useMemo, useState } from 'react'
 import { SwitchTheme } from 'src/components/buttons/switch-theme'
-import { AuthHeader } from 'src/components/others/auth-header'
 import { useNavigation } from 'src/hooks/logic/use-navigation'
 import { routes } from 'src/lib/routes'
 import { initialValues, validationSchemas } from 'src/validators/auth'
-import OtpContent from './otp-content'
-import ProfileContent from './profile-content'
-import { SingUpForm } from './signup-form'
+import { AuthHeader } from '../../../../components/others/auth-header'
+import SurveyContent from './survey-content'
 
-const AuthContent = () => {
+const OnboardingContent = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const { navigate } = useNavigation()
   const form = useForm({
@@ -21,27 +19,7 @@ const AuthContent = () => {
   })
 
   const contentList = useCallback(() => {
-    return [
-      {
-        title: 'Let’s create your Account.',
-        component: <SingUpForm formik={form} onSuccess={() => setCurrentIndex(1)} />,
-      },
-      {
-        title: 'Email Verification',
-        component: <OtpContent email={form.values.email} onSuccess={() => setCurrentIndex(2)} />,
-      },
-      {
-        title: 'Complete your Profile',
-        component: (
-          <ProfileContent
-            loginDetail={{
-              email: form.values.email,
-              password: form.values.password,
-            }}
-          />
-        ),
-      },
-    ]
+    return [{ title: 'Onboarding Survey', component: <SurveyContent onSuccess={() => {}} /> }]
   }, [form])
 
   const currentComponent = useMemo(() => {
@@ -62,4 +40,4 @@ const AuthContent = () => {
   )
 }
 
-export default AuthContent
+export default OnboardingContent

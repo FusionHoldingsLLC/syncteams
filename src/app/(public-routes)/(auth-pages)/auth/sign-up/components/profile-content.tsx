@@ -4,26 +4,40 @@ import { useForm } from '@mantine/form'
 
 import { yupResolver } from 'mantine-form-yup-resolver'
 import { useEffect, useState } from 'react'
+import { LoginInput } from 'src/graphql/generated'
+import { useUpdateUserMutateHook } from 'src/hooks/mutates/use-auth'
 import { initialValues, validationSchemas } from 'src/validators/auth'
 
 type Props = {
-  onSuccess: () => void
+  loginDetail: LoginInput
 }
 
-const ProfileContent = ({ onSuccess }: Props) => {
+const ProfileContent = ({ loginDetail }: Props) => {
   const [animate, setAnimate] = useState(false)
 
   const form = useForm({
     initialValues: initialValues.profileForm,
     validate: yupResolver(validationSchemas.profileForm),
   })
+
+  const { loading, handleUpdate } = useUpdateUserMutateHook({
+    updateUserInput: {
+      email: loginDetail.email,
+      username: form.values.username,
+      firstName: form.values.firstName,
+      lastName: form.values.lastName,
+    },
+  })
   const handleSubmit = async () => {
-    onSuccess()
+    handleUpdate({
+      loginDetail,
+    })
   }
 
   useEffect(() => {
     setAnimate(true)
   }, [])
+
   return (
     <Transition mounted={animate} transition='fade-right' duration={400} timingFunction='ease'>
       {(styles) => (
@@ -33,7 +47,7 @@ const ProfileContent = ({ onSuccess }: Props) => {
           style={{ position: 'relative', ...styles }}
         >
           <TextInput
-            {...form.getInputProps('userName')}
+            {...form.getInputProps('username')}
             className='w-full'
             placeholder='Enter your Preferred User name'
             label='Username'
@@ -51,7 +65,7 @@ const ProfileContent = ({ onSuccess }: Props) => {
             label='Last Name'
           />
 
-          <Button variant='primary' type='submit' className='w-full'>
+          <Button loading={loading} variant='primary' type='submit' className='w-full'>
             Continues
           </Button>
         </form>
