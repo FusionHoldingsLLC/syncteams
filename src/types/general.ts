@@ -1,19 +1,12 @@
 import React, { JSX, ReactNode } from 'react'
 
-export interface UserDetails {
-  email?: string
-  firstName?: string
+export interface TokenData {
   accessToken?: string
-  lastName?: string
-  iso2?: string
-  country?: string
-  role?: 'employee' | 'admin'
-  phoneNumber?: string
   refreshToken?: string
-  jobTitle?: string
-  isOwner?: boolean
-  agentAccess?: string[]
-  _id?: string
+  tokenType?: string
+  isAdmin?: boolean
+  isVerified?: boolean
+  profileCompleted?: boolean
 }
 
 export interface NavItem {

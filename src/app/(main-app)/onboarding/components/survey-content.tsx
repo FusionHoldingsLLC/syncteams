@@ -75,7 +75,11 @@ const FirstSection: React.FC<SectionProps> = ({ onSelect, value }) => {
             data-active={active}
           >
             {' '}
-            <Image className=' bg-contain  ' src={item.imageUri} alt='Onboarding graphic' />{' '}
+            <Image
+              className=' bg-contain size-[100px] '
+              src={item.imageUri}
+              alt='Onboarding graphic'
+            />{' '}
             <Text className='survey-card-text '>{item.title}</Text>
           </UnstyledButton>
         )
@@ -102,11 +106,13 @@ const SecondSection = ({
             onClick={() => {
               onSelect?.(item?.value as string)
             }}
-            className='survey-card-item !min-h-[100px]'
+            className='survey-card-item '
             data-active={active}
           >
             {' '}
-            <Text className='survey-card-text '>{item.label}</Text>
+            <Text data-active={active} className='survey-card-text '>
+              {item.label}
+            </Text>
           </UnstyledButton>
         )
       })}

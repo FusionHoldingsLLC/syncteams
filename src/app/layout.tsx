@@ -2,6 +2,7 @@ import { ColorSchemeScript } from '@mantine/core'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Toaster } from 'sonner'
+import RouteGuard from 'src/components/layout/route-guard'
 import Providers from 'src/components/providers'
 import './globals.css'
 
@@ -43,9 +44,7 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased `}>
         <Providers>
-          {/* <RouteGuard> */}
-          {children}
-          {/* </RouteGuard> */}
+          <RouteGuard>{children}</RouteGuard>
         </Providers>
         <Toaster position='top-center' />
       </body>

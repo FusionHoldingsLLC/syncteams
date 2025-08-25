@@ -5,6 +5,7 @@ mutation Login($input: LoginInput!) {
     tokenType
     isVerified
     profileCompleted
+    isAdmin
   }
 }
 

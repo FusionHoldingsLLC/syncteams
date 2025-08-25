@@ -309,7 +309,7 @@ body {
 }
 
 .survey-card-item {
-  @apply border-[0.5px] hover:bg-[#F2FAFD] dark:hover:bg-[#0C1519]    transition-all duration-300 rounded-[16px]  border-[#D1D1D1] p-4;
+  @apply border-[0.5px] hover:text-primary hover:bg-[#F2FAFD] dark:hover:bg-[#0C1519]    transition-all duration-300 rounded-[16px]  border-[#D1D1D1] p-4;
 }
 .survey-card-item[data-active='true'] {
   @apply border-[0.5px] rounded-[16px]  !border-primary p-[16px] bg-primary/10;
@@ -319,6 +319,9 @@ body {
   @apply text-[16px] font-semibold text-center;
 }
 
+.survey-card-text[data-active='true'] {
+  @apply text-primary;
+}
 .page-title {
   @apply text-black-1 dark:text-white;
 }
@@ -386,7 +389,7 @@ body {
 }
 
 .page-layout-wrapper {
-  @apply w-full flex flex-col gap-4 py-4;
+  @apply w-full flex flex-col gap-4;
 }
 
 .filter-items-btn {

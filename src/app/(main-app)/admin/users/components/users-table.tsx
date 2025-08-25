@@ -98,7 +98,7 @@ export const UsersTable = () => {
                 <Table.Tr
                   key={index}
                   onClick={() => {
-                    router.push(routes.app.admin.userDetails(`${index}`))
+                    router.push(routes.admin.userDetails(`${index}`))
                   }}
                   className='cursor-pointer h-[50px] hover:bg-gray-100 transition'
                 >

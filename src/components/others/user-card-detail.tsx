@@ -7,10 +7,11 @@ import { IconSquarePlus } from '@/public/assets/svgs/icon-square-plus'
 import { IconSettings } from '@/public/assets/svgs/nav/icon-setting'
 import { Avatar, Box, Center, Flex, Menu, Switch, Text, UnstyledButton } from '@mantine/core'
 import { useRouter } from 'nextjs-toploader/app'
-import React from 'react'
+import React, { useCallback } from 'react'
 import useDarkMode from 'src/hooks/logic/use-dark-mode'
 import { routes } from 'src/lib/routes'
 import { useUiStore } from 'src/store/ui.store'
+import { userAuthStore } from 'src/store/user.store'
 
 type MenuItemType =
   | {
@@ -37,53 +38,59 @@ const UserCardDetail: React.FC<Props> = ({ className }) => {
   const { isNavCollapse } = useUiStore()
 
   const { isDarkMode, changeMode } = useDarkMode()
+  const { logOut } = userAuthStore()
 
   const router = useRouter()
 
-  const menuItems: MenuItemType[] = [
-    {
-      label: 'Syncteams Studio',
-      icon: (
-        <Center className='size-4 rounded-[4px] bg-primary '>
-          <IconGalleryEnd />
-        </Center>
-      ),
-      onClick: () => {},
-    },
-    {
-      label: 'Fushion Tech',
-      icon: (
-        <Center className='size-4 rounded-[4px] bg-primary '>
-          <IconGalleryEnd />
-        </Center>
-      ),
-      onClick: () => {},
-    },
-    {
-      label: 'Add Team',
-      icon: <IconSquarePlus className='stroke-[#474747] dark:stroke-white' />,
-      onClick: () => {},
-    },
-    { type: 'divider' },
-    {
-      label: 'Settings',
-      icon: <IconSettings className='stroke-[#474747] dark:stroke-white size-4' />,
-      rightIcon: <IconRightFlatArrow className='stroke-[#474747] dark:stroke-white size-4' />,
-      onClick: () => router.push(routes.app.admin.settings),
-    },
-    {
-      type: 'switch',
-      label: 'Dark Mode',
-      icon: <IconMoon className='stroke-[#474747] dark:stroke-white size-4' />,
-    },
-    { type: 'divider' },
-    {
-      label: 'Log Out',
-      icon: <IconLogout />,
-      className: 'hover:!bg-[#FF0000]/5 !text-[#FF0000]',
-      onClick: () => router.push(routes.auth.login),
-    },
-  ]
+  const menuItems = useCallback(() => {
+    return [
+      {
+        label: 'Syncteams Studio',
+        icon: (
+          <Center className='size-4 rounded-[4px] bg-primary '>
+            <IconGalleryEnd />
+          </Center>
+        ),
+        onClick: () => {},
+      },
+      {
+        label: 'Fushion Tech',
+        icon: (
+          <Center className='size-4 rounded-[4px] bg-primary '>
+            <IconGalleryEnd />
+          </Center>
+        ),
+        onClick: () => {},
+      },
+      {
+        label: 'Add Team',
+        icon: <IconSquarePlus className='stroke-[#474747] dark:stroke-white' />,
+        onClick: () => {},
+      },
+      { type: 'divider' },
+      {
+        label: 'Settings',
+        icon: <IconSettings className='stroke-[#474747] dark:stroke-white size-4' />,
+        rightIcon: <IconRightFlatArrow className='stroke-[#474747] dark:stroke-white size-4' />,
+        onClick: () => router.push(routes.admin.settings.path),
+      },
+      {
+        type: 'switch',
+        label: 'Dark Mode',
+        icon: <IconMoon className='stroke-[#474747] dark:stroke-white size-4' />,
+      },
+      { type: 'divider' },
+      {
+        label: 'Log Out',
+        icon: <IconLogout />,
+        className: 'hover:!bg-[#FF0000]/5 !text-[#FF0000]',
+        onClick: () => {
+          logOut()
+          router.push(routes.auth.login)
+        },
+      },
+    ]
+  }, [routes, isDarkMode, changeMode, logOut, router])
 
   return (
     <Box
@@ -118,7 +125,7 @@ const UserCardDetail: React.FC<Props> = ({ className }) => {
         </Menu.Target>
 
         <Menu.Dropdown>
-          {menuItems.map((item, index) => {
+          {menuItems().map((item, index) => {
             if (item.type === 'divider') {
               return <Menu.Divider key={index} />
             }

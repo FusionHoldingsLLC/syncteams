@@ -1,5 +1,6 @@
 import { create } from 'zustand'
-import { createJSONStorage, persist } from 'zustand/middleware'
+import { persist } from 'zustand/middleware'
+import { createEncryptedStorage } from './encrypted-store'
 
 interface UIStoreState {
   isDarkMode: boolean | null
@@ -24,7 +25,7 @@ export const useUiStore = create<UIStoreState>()(
     }),
     {
       name: 'app-ui-store',
-      storage: createJSONStorage(() => localStorage),
+      storage: createEncryptedStorage<UIStoreState>(), // ✅ type-safe now
     },
   ),
 )

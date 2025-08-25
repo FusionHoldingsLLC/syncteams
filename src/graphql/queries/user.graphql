@@ -35,3 +35,14 @@ query GetCurrentUser {
     username
   }
 }
+
+query OnboardingEntries {
+  getOnboarding {
+    onboardingEntries {
+      answer
+      id
+      question
+    }
+    totalCount
+  }
+}

@@ -1,6 +1,5 @@
 import {
   Anchor,
-  Box,
   Button,
   Divider,
   Flex,
@@ -11,10 +10,9 @@ import {
 } from '@mantine/core'
 
 import { IconGoogle } from '@/public/assets/svgs/icon-google'
-import { AuthHeader } from 'src/components/others/auth-header'
 import { useLogin } from 'src/hooks/logic/use-login'
 import { routes } from 'src/lib/routes'
-import ProfileContent from '../../sign-up/components/profile-content'
+import { CompleteSetup } from './complete-setup'
 
 const LoginContent = () => {
   const {
@@ -25,22 +23,14 @@ const LoginContent = () => {
     isUserExists,
     setIsUserExists,
     loading,
-    setIsProfileCompleted,
-    isProfileCompleted,
     isGenerating,
+    showCompleteSetup,
+    setupType,
+    closeSetup,
   } = useLogin()
 
-  if (isProfileCompleted === false)
-    return (
-      <Box>
-        <AuthHeader
-          onBackClick={() => setIsProfileCompleted(null)}
-          title={'Complete your Profile'}
-        />
-        <Text className='auth-title text-center'></Text>
-        <ProfileContent loginDetail={form.values} />
-      </Box>
-    )
+  if (showCompleteSetup)
+    return <CompleteSetup setupType={setupType} loginData={form.values} onClose={closeSetup} />
 
   return (
     <>

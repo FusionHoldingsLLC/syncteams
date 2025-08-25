@@ -3,6 +3,7 @@ import { UseFormReturnType } from '@mantine/form'
 
 import { IconGoogle } from '@/public/assets/svgs/icon-google'
 import { useEffect, useState } from 'react'
+import { useQueryParams } from 'src/hooks/logic/use-query-params'
 import { useCreateUserMutateHook } from 'src/hooks/mutates/use-auth'
 import { FormLoginValue } from 'src/types/auth'
 
@@ -37,6 +38,18 @@ export const SingUpForm = ({ onSuccess, formik }: Props) => {
       },
     })
   }
+  const { getParam, removeParam } = useQueryParams()
+
+  const email = getParam('email') as string
+  useEffect(() => {
+    if (!formik.values.email) {
+      formik.setFieldValue('email', email)
+
+      setTimeout(() => {
+        removeParam('email')
+      }, 300)
+    }
+  }, [email])
 
   useEffect(() => {
     setAnimate(true)

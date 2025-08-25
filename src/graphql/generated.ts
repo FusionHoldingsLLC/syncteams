@@ -370,7 +370,6 @@ export type ContinueWorkflowInput = {
   message?: InputMaybe<Scalars['String']['input']>;
   taskId: Scalars['ID']['input'];
   type: TaskContinueType;
-  workflowLogId: Scalars['ID']['input'];
 };
 
 export type CreateAgentToolInput = {
@@ -2449,7 +2448,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginType', accessToken: string, refreshToken: string, tokenType: string, isVerified: boolean, profileCompleted: boolean } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginType', accessToken: string, refreshToken: string, tokenType: string, isVerified: boolean, profileCompleted: boolean, isAdmin: boolean } };
 
 export type CheckUserMutationVariables = Exact<{
   input: CheckUserInput;
@@ -2524,6 +2523,11 @@ export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetCurrentUserQuery = { __typename?: 'Query', getCurrentUser: { __typename?: 'UserType', avatar?: string | null, email: string, lastName?: string | null, firstName?: string | null, subscriptionType: SubscriptionType, username?: string | null, preferences?: { __typename?: 'PreferenceType', data: any, fontSize?: number | null, language?: PreferenceLanguage | null, sideBarMode?: string | null, theme?: string | null, activeWorkflowIds?: Array<{ __typename?: 'ActiveWorkflowType', active: boolean, no: number, workflowId: string }> | null } | null, onboarding?: Array<{ __typename?: 'OnboardingEntryType', answer: Array<string>, id: string, question: string }> | null, subscription?: { __typename?: 'UserSubscriptionResponse', cancelAtPeriodEnd?: boolean | null, endDate?: any | null, nextBillingDate?: any | null, planType: SubscriptionType, startDate?: any | null, status?: SubscriptionStatus | null, trialEndDate?: any | null, trialStartDate?: any | null } | null } };
 
+export type OnboardingEntriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type OnboardingEntriesQuery = { __typename?: 'Query', getOnboarding: { __typename?: 'OnboardingListType', totalCount: number, onboardingEntries: Array<{ __typename?: 'OnboardingEntryType', answer: Array<string>, id: string, question: string }> } };
+
 
 export const LoginDocument = gql`
     mutation Login($input: LoginInput!) {
@@ -2533,6 +2537,7 @@ export const LoginDocument = gql`
     tokenType
     isVerified
     profileCompleted
+    isAdmin
   }
 }
     `;
@@ -2995,3 +3000,47 @@ export type GetCurrentUserQueryHookResult = ReturnType<typeof useGetCurrentUserQ
 export type GetCurrentUserLazyQueryHookResult = ReturnType<typeof useGetCurrentUserLazyQuery>;
 export type GetCurrentUserSuspenseQueryHookResult = ReturnType<typeof useGetCurrentUserSuspenseQuery>;
 export type GetCurrentUserQueryResult = Apollo.QueryResult<GetCurrentUserQuery, GetCurrentUserQueryVariables>;
+export const OnboardingEntriesDocument = gql`
+    query OnboardingEntries {
+  getOnboarding {
+    onboardingEntries {
+      answer
+      id
+      question
+    }
+    totalCount
+  }
+}
+    `;
+
+/**
+ * __useOnboardingEntriesQuery__
+ *
+ * To run a query within a React component, call `useOnboardingEntriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useOnboardingEntriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOnboardingEntriesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useOnboardingEntriesQuery(baseOptions?: Apollo.QueryHookOptions<OnboardingEntriesQuery, OnboardingEntriesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<OnboardingEntriesQuery, OnboardingEntriesQueryVariables>(OnboardingEntriesDocument, options);
+      }
+export function useOnboardingEntriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<OnboardingEntriesQuery, OnboardingEntriesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<OnboardingEntriesQuery, OnboardingEntriesQueryVariables>(OnboardingEntriesDocument, options);
+        }
+export function useOnboardingEntriesSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<OnboardingEntriesQuery, OnboardingEntriesQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<OnboardingEntriesQuery, OnboardingEntriesQueryVariables>(OnboardingEntriesDocument, options);
+        }
+export type OnboardingEntriesQueryHookResult = ReturnType<typeof useOnboardingEntriesQuery>;
+export type OnboardingEntriesLazyQueryHookResult = ReturnType<typeof useOnboardingEntriesLazyQuery>;
+export type OnboardingEntriesSuspenseQueryHookResult = ReturnType<typeof useOnboardingEntriesSuspenseQuery>;
+export type OnboardingEntriesQueryResult = Apollo.QueryResult<OnboardingEntriesQuery, OnboardingEntriesQueryVariables>;
